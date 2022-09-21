@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import {toast,ToastContainer} from "react-toastify"
+import { toast, ToastContainer } from "react-toastify";
 const Form = (props) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -53,15 +53,13 @@ const Form = (props) => {
         );
         console.log(result);
         if (result.ok) router.push("/patient");
-        else
-        {toast.error("Authentication Failed !", {
+        else {
+          toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
           });
-       
         }
-         
       } catch (err) {
-      console.log(err)
+        console.log(err);
       }
     } else {
       try {
@@ -80,7 +78,7 @@ const Form = (props) => {
         else
           toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
-          })
+          });
       } catch (err) {
         console.log(err);
       }
@@ -180,12 +178,10 @@ const Form = (props) => {
           >
             {props.isLogin ? "Sign-In" : "Register"}
           </button>
-          <ToastContainer/>
-    
+          <ToastContainer />
         </form>
       </div>
     </>
   );
-  
 };
 export default Form;

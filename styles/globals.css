@@ -28,4 +28,21 @@ a {
     background: black;
   }
 }
+.imageGalleryHeight .image-gallery-slide .image-gallery-image {
+  max-height: 500px !important;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+}
 
+.fullscreen .image-gallery-slide img {
+  max-height: 100vh;
+}
+.image-gallery-thumbnail {
+  width: 90px
+}
+
+.image-gallery-thumbnail img {
+  width: auto;
+  height: 75px;
+}

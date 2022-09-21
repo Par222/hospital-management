@@ -1,7 +1,7 @@
 import Link from "next/link";
 const NavBar = (props) => {
   return (
-    <div className="flex justify-around  bg-red-400 items-center w-full">
+    <div className="flex justify-around  bg-blue-500 items-center w-full">
       <div className="text-white font-bold px-10 py-5 text-4xl flex space-x-5 items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
