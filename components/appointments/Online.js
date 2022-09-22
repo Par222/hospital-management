@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import Countdown from "react-countdown";
 import DropFiles from "../common/DropFiles";
 import "react-quill/dist/quill.snow.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ReactImageGallery from "react-image-gallery";
-import ReactQuill from "react-quill";
+const ReactQuill=dynamic(import('react-quill'),{ssr:false})
 const Online = () => {
   const [isVideo, setIsVideo] = useState(false);
   const [isText, setIsText] = useState(false);
