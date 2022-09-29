@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
+import AuthContext from "../../store/auth-context";
+
 const Form = (props) => {
+  const authCtx = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
