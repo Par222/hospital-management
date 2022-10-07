@@ -27,7 +27,7 @@ function Sidebar(props){
     }
 
     return(
-        <div className = "flex flex-col items-center w-[7%] fixed h-full bg-white z-10">
+        <div className = "flex flex-col items-center w-28 h-screen bg-white z-10 shrink-0">
             <h2 className = {`text-indigo-900`}><Link href = ""><FontAwesomeIcon icon = {faM}></FontAwesomeIcon></Link></h2>
             <div className = {`w-[100%] flex flex-col justify-center h-[85%] items-center`}>
                 <SidebarIcon icon = {faHome} id = "overview_sidebar_icon" onClick = {tabClickHandler} isSelected = {tabClicked === "overview_sidebar_icon"}/>

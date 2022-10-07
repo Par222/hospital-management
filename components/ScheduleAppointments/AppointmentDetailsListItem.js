@@ -8,12 +8,14 @@ function AppointmentDetailsListItem(props){
     }
     else if(props.isConfirmed == null){
         confirmationStatusDiv = <div className = "flex m-2 justify-center w-[19%]">
-            <button className = "text-[20px] mr-1 text-[#9290e9]" onClick = {() =>{
+            <button className = "text-[20px] mr-1 text-[#9290e9]" onClick = {(event) =>{
+                event.stopPropagation();
                 props.onConfirmAppointment(props.id);
             }}>
                 <FontAwesomeIcon icon = {faCheckSquare} />
             </button>
-            <button className = "text-[20px] ml-1 text-[#eb6c76]" onClick = {() =>{
+            <button className = "text-[20px] ml-1 text-[#eb6c76]" onClick = {(event) =>{
+                event.stopPropagation();
                 props.onDeclineAppointment(props.id);
             }}>
                 <FontAwesomeIcon icon = {faXmarkSquare} />
@@ -25,7 +27,7 @@ function AppointmentDetailsListItem(props){
     }
     
     return(
-        <li className = "flex items-center p-2 py-1">
+        <li className = "flex items-center p-2 py-1 hover:bg-gray-500 hover:text-white cursor-pointer" onClick = {props.onAppointmentClick}>
             <div className = "rounded-full bg-gray-400 h-[45px] w-[45px] m-2">
                 <img className = "h-[100%] w-[100%] rounded-full object-cover object-center" src = {props.profilePicture || "https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg"} />
             </div>

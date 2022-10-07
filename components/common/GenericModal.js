@@ -26,6 +26,7 @@ const GenericModal = (props) => {
               >
                 {props.negText}
               </button>
+              
             </div>
           )}
             <div className="flex w-full justify-end space-x-3 px-5 mt-5 mb-5">

@@ -6,9 +6,9 @@ import Layout from '../components/Layout';
 function MyApp({ Component, pageProps }) {
  
   return <AuthContextProvider>
-    {/* <Layout> */}
+    <Layout>
       <Component {...pageProps} />
-    {/* </Layout> */}
+    </Layout>
   </AuthContextProvider>
 }
 

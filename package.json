@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@devexpress/dx-react-core": "^3.0.5",
+    "@devexpress/dx-react-scheduler": "^3.0.5",
+    "@devexpress/dx-react-scheduler-material-ui": "^3.0.5",
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -27,6 +30,7 @@
     "moment": "^2.29.4",
     "next": "12.3.0",
     "react": "18.2.0",
+    "react-chartjs-2": "^4.3.1",
     "react-countdown": "^2.3.2",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.2",

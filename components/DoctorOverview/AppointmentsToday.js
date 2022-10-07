@@ -57,7 +57,7 @@ function AppointmentsToday(props){
     })
 
     return(
-        <AppointmentInfoCard className = "w-[27%]" header = "Appointments Today">
+        <AppointmentInfoCard className = "" header = "Appointments Today">
             <ul className = "w-[100%] flex flex-col justify-center">
                 {appointments}
             </ul>

@@ -1,5 +1,7 @@
-import AppointmentInfoCard from "./AppointmentInfoCard";
+import AppointmentInfoCard from "../DoctorOverview/AppointmentInfoCard";
 import AppointmentDetailsListItem from "./AppointmentDetailsListItem";
+import AppointmentDetailsModal from "./AppointmentDetailsModal";
+import GenericModal from "../common/GenericModal";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -61,6 +63,8 @@ const DUMMY_APPOINTMENTS = [{
 function AppointmentsInfo(props){
     const Router = useRouter();
     const [appointments, setAppointments] = useState(DUMMY_APPOINTMENTS);
+    const [isModalVisible, setIsModalVisible] = useState(true);
+    // const [modalDetails, setModalDetails] = useState(null);
 
     const appointmentConfirmationHandler = (appointmentID) =>{
         setAppointments((prevAppointments) =>{
@@ -88,8 +92,19 @@ function AppointmentsInfo(props){
         })
     }
 
+    const closeModalHandler = () =>{
+        setIsModalVisible(false);
+        // setModalDetails(null);
+    }
+
+    const viewAppointmentDetailsHandler = (appointmentID) =>{
+        // setModalDetails(
+        // )
+        setIsModalVisible(true);   
+    }
+
     const appointmentDetails = appointments.map((appointment) =>{
-        const onClick = appointment.isConfirmed == null && {onConfirmAppointment: appointmentConfirmationHandler, onDeclineAppointment: appointmentDeclinationHandler};
+        const onButtonClick = appointment.isConfirmed == null && {onConfirmAppointment: appointmentConfirmationHandler.bind(this, appointment.id), onDeclineAppointment: appointmentDeclinationHandler.bind(this, appointment.id)};
         return <AppointmentDetailsListItem key = {appointment.id}
             id = {appointment.id} 
             name = {appointment.name}
@@ -98,7 +113,8 @@ function AppointmentsInfo(props){
             time = {appointment.time}
             isConfirmed = {appointment.isConfirmed}
             gender = {appointment.gender}
-            {...onClick}
+            {...onButtonClick}
+            onAppointmentClick = {viewAppointmentDetailsHandler}
         />
     });
 
@@ -107,12 +123,33 @@ function AppointmentsInfo(props){
     }
 
     return(
-            <AppointmentInfoCard className = "" header = "Appointment Requests" action = {
-                <button className = "text-[13.5px] text-cyan-400 hover:text-indigo-500" 
-                onClick = {viewAllAppointmentsHandler}>View All {">"}</button>
-            }>
-                <ul className = "w-[100%] flex flex-col justify-center">{appointmentDetails}</ul>
-            </AppointmentInfoCard>
+            <>
+                {/* {isModalVisible && modalDetails} */}
+                
+            <GenericModal title = "Appointment Details" 
+            closeHandler = {closeModalHandler}
+            isStepModal = {false}
+            posText = "Confirm"
+            posHandler = {appointmentConfirmationHandler.bind(this)}
+            negText = "Decline"
+            negHandler = {appointmentDeclinationHandler}>
+                <AppointmentDetailsModal name = "Param Kothari"
+                    age = "22"
+                    gender = "Male"
+                    mode = "Video Conferencing"
+                    illness = "Fever"
+                    description = "Mild headache, cold, cough"
+                    date = "10 October"
+                    time = "10:30 AM"
+                />
+            </GenericModal>
+                <AppointmentInfoCard className = "" header = "Appointment Requests" action = {
+                    <button className = "text-[13.5px] text-cyan-400 hover:text-indigo-500" 
+                    onClick = {viewAllAppointmentsHandler}>View All {">"}</button>
+                }>
+                    <ul className = "w-[100%] flex flex-col justify-center">{appointmentDetails}</ul>
+                </AppointmentInfoCard>
+            </>
     )
 }
 

@@ -1,5 +1,8 @@
+import ScheduleAppointments from "../../components/ScheduleAppointments/ScheduleAppointments"
 function Appointments(props){
-    return <h1>Hi</h1>
+    return(
+        <ScheduleAppointments />
+    )
 }
 
 export default Appointments;

@@ -7,8 +7,10 @@ function Layout(props){
     const authCtx =  useContext(AuthContext);
     return(
             <div className = "flex min-h-screen ">
-                {/* <Sidebar /> */}
-                {props.children}
+                <Sidebar />
+                <div className="grow overflow-y-auto h-screen pl-10 w-[100%] bg-gray-100">
+                    {props.children}
+                </div>
             </div>
     )
 }
