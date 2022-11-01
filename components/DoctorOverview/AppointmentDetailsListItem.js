@@ -3,10 +3,10 @@ import {faCheckSquare, faXmarkSquare} from "@fortawesome/free-solid-svg-icons"
 
 function AppointmentDetailsListItem(props){
     let confirmationStatusDiv = "";
-    if(props.isConfirmed){
+    if(props?.status === "Confirmed"){
         confirmationStatusDiv = <div className = "text-[11px] text-[#9290e9] bg-[#e9f6fe] rounded font-bold w-[19%] text-center p-[6px] m-2">Confirmed</div>
     }
-    else if(props.isConfirmed == null){
+    else if(props?.status === "Pending"){
         confirmationStatusDiv = <div className = "flex m-2 justify-center w-[19%]">
             <button className = "text-[20px] mr-1 text-[#9290e9]" onClick = {() =>{
                 props.onConfirmAppointment(props.id);

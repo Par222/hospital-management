@@ -52,10 +52,17 @@ const Form = (props) => {
               password: password,
               returnSecureToken: true,
             }),
+            headers: {
+              'Content-Type': 'application/json',
+            }
           }
         );
         console.log(result);
-        if (result.ok) router.push("/patient");
+        if (result.ok) {
+          const data = await result.json()
+          authCtx.onLogin(data.idToken, new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).getTime()) 
+          router.push("/patient")
+        }
         else {
           toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
@@ -77,7 +84,13 @@ const Form = (props) => {
             }),
           }
         );
-        if (result.ok) router.push("/patient");
+        console.log(result)
+        if (result.ok) {
+          const data = await result.json()
+          authCtx.onLogin(data.idToken, new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).getTime()) 
+          router.push("/patient");
+          console.log(result)
+        }
         else
           toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
@@ -159,7 +172,7 @@ const Form = (props) => {
           ></input>
           {!passwordIsValid && passwordIsBlur && (
             <p className="text-red-600 text-sm mb-1 ">
-              Minimun 7 characters needed
+              Minimum 7 characters needed
             </p>
           )}
           <button

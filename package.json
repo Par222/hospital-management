@@ -36,7 +36,8 @@
     "react-dropzone": "^14.2.2",
     "react-image-gallery": "^1.2.9",
     "react-quill": "^2.0.0",
-    "react-toastify": "^9.0.8"
+    "react-toastify": "^9.0.8",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.11",
