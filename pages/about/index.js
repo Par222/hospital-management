@@ -10,7 +10,7 @@ const Index = () => {
     <>
       <NavBar></NavBar>
       <div className={`h-[700px] flex ${styles.about}`}>
-        <div className="flex flex-col mt-[4%] ml-[10%] justify-center  ">
+        <div className="flex flex-col mt-[8%] ml-[10%] justify-center  ">
           <div className="font-Heading text-lg text-tertiaryblue-50 font-semibold">
             About Us
           </div>

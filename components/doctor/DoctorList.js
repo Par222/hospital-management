@@ -3,11 +3,11 @@ import DoctorCard from "./DoctorCard";
 export const DUMMY_DOCTORS = [
   {
     id: 1,
-    name: "DR. Antonio Mitchell",
-    category: "Skin",
+    name: "DR. Bruno Rodrigeous",
+    expertise: "Skin",
     age: 44,
     des: "Specialized dermatologist for various types of skin diseases.Dermatologists are medical doctors who specialize in skin, hair and nails. Dermatologists also handle cosmetic disorders, like hair loss and scars. Your dermatologist will examine you, order lab tests, make a diagnosis and treat your condition with medication or a procedure",
-    img: "https://t3.ftcdn.net/jpg/02/95/51/80/360_F_295518052_aO5d9CqRhPnjlNDTRDjKLZHNftqfsxzI.jpg",
+    img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
     fees: 1000,
     appointments: [
       {
@@ -27,10 +27,10 @@ export const DUMMY_DOCTORS = [
   {
     id: 2,
     name: "DR. Beena Cheedha",
-    category: "ENT",
+    expertise: "Heart",
     age: 32,
     des: "Specialized in operations of eyes,nose ,throat",
-    img: "https://as2.ftcdn.net/v2/jpg/03/20/74/45/1000_F_320744517_TaGkT7aRlqqWdfGUuzRKDABtFEoN5CiO.jpg",
+    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
     fees: 2000,
     appointments: [
       {
@@ -49,7 +49,7 @@ export const DUMMY_DOCTORS = [
   {
     id: 3,
     name: "DR. Niket Motwani",
-    category: "Eyes",
+    expertise: "Eyes",
     age: 42,
     des: "Specialized in operations of eyes.",
     img: "https://as1.ftcdn.net/v2/jpg/02/60/04/08/1000_F_260040863_fYxB1SnrzgJ9AOkcT0hoe7IEFtsPiHAD.jpg",
@@ -72,7 +72,7 @@ export const DUMMY_DOCTORS = [
   {
     id: 4,
     name: "DR. Kirit Kapadia",
-    category: "Teeth",
+    expertise: "Tooth",
     age: 33,
     des: "Specialized dentist in all issues concerning teeth",
     img: "https://as2.ftcdn.net/v2/jpg/02/71/27/05/1000_F_271270515_h430bOQYBpPIXZXELDhk5GMjAabEGmAo.jpg",
@@ -94,7 +94,7 @@ export const DUMMY_DOCTORS = [
   {
     id: 5,
     name: "DR. Ramika Sen",
-    category: "Stomach",
+    expertise: "Brain",
     age: 44,
     des: "Specialized in all concerns regarding the stomach",
     img: "https://as1.ftcdn.net/v2/jpg/02/91/43/02/1000_F_291430206_U1vohsIJWJvF3wb1a3uxfYLPCfXMRbum.jpg",
@@ -117,7 +117,7 @@ export const DUMMY_DOCTORS = [
 ];
 const DoctorList = ({ fees, type }) => {
   let [filteredArray, setFilteredArray] = useState(DUMMY_DOCTORS);
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(filteredArray, fees, type);
     if (fees == "any" && type == "all") setFilteredArray(DUMMY_DOCTORS);
     else if (fees == "any" && type != "all") {
@@ -133,14 +133,14 @@ const DoctorList = ({ fees, type }) => {
         )
       );
     }
-  }, [fees, type]);
+  }, [fees, type]);*/
 
   const docList = filteredArray.map((doc) => (
     <DoctorCard {...doc}></DoctorCard>
   ));
   return (
     <>
-      <div className="grid grid-cols-3 w-full my-5">
+      <div className="grid grid-cols-3 w-[80%] my-5 mx-20">
         {docList.length > 0 && docList}
       </div>
       {docList.length == 0 && (
