@@ -37,6 +37,7 @@ const Form = (props) => {
   const submitHandler = async (event) => {
     let FormisValid = nameIsValid && emailIsValid && passwordIsValid;
     event.preventDefault();
+    fetc
     let API_KEY = "AIzaSyCqx5Fmv21exf5UNsEriBwFlfBA7maM3K4";
     if (props.isLogin) {
       try {
