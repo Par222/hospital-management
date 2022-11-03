@@ -5,15 +5,15 @@ import PatientGenderChart from "./PatientGenderChart";
 
 function MiddleDiv(props){
     return(
-        <div className = "w-[100%] flex">
-            <div className = "w-[27%]">
+        <div className = "w-[100%] flex space-x-6">
+            <div className = "w-[27%] flex-grow">
                 <AppointmentsInfo />
             </div>
-            <div className = "mx-6 w-[40%]">
+            <div className = "w-[40%] flex-grow">
                 <PatientsInfo />
                 <PatientGenderChart />
             </div>
-            <div className = "w-[27%]">
+            <div className = "w-[27%] flex-grow">
                 <AppointmentsToday />
             </div>
         </div>

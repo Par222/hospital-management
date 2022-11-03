@@ -13,7 +13,7 @@ function Layout(props) {
         <AppointmentContextProvider>
           <div className="flex min-h-screen ">
             <Sidebar />
-            <div className="grow overflow-y-auto h-screen pl-10 w-[100%] bg-gray-100">
+            <div className="grow overflow-y-auto h-screen px-10 w-[100%] bg-gray-100 pb-10">
               {props.children}
             </div>
           </div>

@@ -281,7 +281,7 @@ function AppointmentsInfo(props) {
                 />
             </GenericModal> */}
       <AppointmentInfoCard
-        className="py-[16px] overflow-y-scroll"
+        className="h-[500px] py-20 overflow-y-auto "
         header="Appointment Requests"
         action={
           <button
@@ -292,7 +292,7 @@ function AppointmentsInfo(props) {
           </button>
         }
       >
-        <ul className="h-[600px] w-[100%] flex flex-col justify-center">
+        <ul className="w-[100%] flex flex-col justify-center">
           {appointmentDetails}
         </ul>
       </AppointmentInfoCard>

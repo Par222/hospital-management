@@ -14,7 +14,8 @@ function Sidebar(props){
             setTabClicked("overview_sidebar_icon");
         }
         else{
-            const path = Router.pathname.slice(8);
+            const index = Router.pathname.indexOf("/", 8);
+            const path = index >= 8 ? Router.pathname.slice(8, index) : Router.pathname.slice(8);
             setTabClicked(`${path}_sidebar_icon`);
         }
     },[Router.pathname])

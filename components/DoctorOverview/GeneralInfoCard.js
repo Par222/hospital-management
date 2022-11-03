@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function GeneralInfoCard(props){
     return(
-        <Card className = {` m-3 py-3 ${props.className} items-center`}>
+        <Card className = {` my-3 py-3 ${props.className} items-center`}>
             <div className = "h-[60px] w-[60px] rounded-full bg-gray-300 bg-opacity-30 text-white mx-4 text-lg flex justify-center items-center">
                 <FontAwesomeIcon icon = {props.icon} />
             </div>
