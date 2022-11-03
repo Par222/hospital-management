@@ -7,6 +7,7 @@ const Index = (props) => {
   const [fees, setFees] = useState("any");
   const [type, setType] = useState("All");
   const [keyWord, setkeyWord] = useState("");
+
   const filterHandler = (event) => {
     setType(event.target.value);
   };
@@ -19,50 +20,13 @@ const Index = (props) => {
     "All",
     "Heart",
     "Eyes",
-    " Lungs",
+    "Lungs",
     "Tooth",
     "Brain",
     "Skin",
   ];
   return (
-    /*<div>
-      <NavBar></NavBar>
-      <div className="bg-blue-900 py-5 px-10 flex">
-        <form className="flex justify-evenly w-[100%] mx-4 items-center">
-          <label htmlFor="doctors" className="text-xl text-white font-semibold">
-            Select doctor type
-          </label>
-          <select
-            name="doctors"
-            onChange={filterHandler}
-            className="rounded-md w-[20%] border border-blue-900 bg-blue-100 px-2 py-1"
-          >
-            <option value="all">All</option>
-            <option value="eyes">Eye</option>
-            <option value="ent">ENT</option>
-            <option value="teeth">Teeth</option>
-            <option value="skin">Skin</option>
-            <option value="stomach">Stomach</option>
-          </select>
-          <label></label>
-          <label htmlFor="doctors" className="text-xl text-white font-semibold">
-            Select consultation fees
-          </label>
-          <select
-            name="doctors"
-            onChange={feesHandler}
-            className="rounded-md w-[20%] border border-blue-900 bg-blue-100 px-2 py-1"
-          >
-            <option value="any">Any</option>
-            <option value="500">Below 500</option>
-            <option value="1000">Below 1000</option>
-            <option value="1500">Below 1500</option>
-            <option value="2000">Below 2000</option>
-          </select>
-        </form>
-      </div>
-      <DoctorList fees={fees} type={type}></DoctorList>
-    </div>*/
+  
     <>
       <NavBar></NavBar>
       <div className={`h-[700px] flex ${styles.doc}`}>
@@ -137,8 +101,34 @@ const Index = (props) => {
             ))}
         </div>
       </div>
-      <div>
-        <DoctorList></DoctorList>
+      <div className="w-full flex">
+        <DoctorList expertise={type} fees={fees}></DoctorList>
+        <div className="px-9 py-6 shadow-md  h-fit my-20 font-Heading mr-5 bg-tertiarywhite-50">
+            <h1 className="text-blackShade-50 text-2xl font-bold font-Heading py-4">Filters</h1>
+            <div className="flex h-1 w-full rounded-md ">
+                <div className="h-1 w-[20%] bg-tertiaryblue-50 rounded-md"></div><div className="h-1 w-[80%] bg-tertiarygrey-575 rounded-md"></div>
+            </div>
+            <form className="flex flex-col" onSubmit={(e)=>e.preventDefault()}>
+            <label htmlFor="doctors" className="text-base text-white font-semibold my-2">
+            Consultation Fees
+          </label>
+          <select
+            name="doctors"
+            onChange={feesHandler}
+            className="rounded-md w-[100%] border border-r-navyblue-900 font-display bg-tertiaryblue-60  py-2 text-left"
+          >
+            <option value="any">Any</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+            <option value="1500">1500</option>
+            <option value="2000">2000</option>
+            <option value="3000">3000</option>
+          </select>
+         
+            </form>
+            
+
+        </div>
       </div>
     </>
   );

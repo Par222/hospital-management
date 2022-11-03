@@ -51,7 +51,7 @@ const Online = () => {
       return (
         <>
           <div className="flex justify-center my-5">
-            <span className="text-3xl font-semibold py-7 px-10 rounded-full border-lime-400 border-4">
+            <span className="text-3xl font-semibold py-7 px-10 rounded-full border-tertiarygreen-400 border-4">
               {seconds}
             </span>
           </div>
@@ -63,7 +63,7 @@ const Online = () => {
               setIsDisabledT(false);
             }}
           >
-            <button className="my-3 text-white rounded-full bg-red-600 w-[20%] px-5 py-1">
+            <button className="my-3 text-tertiarywhite-100 rounded-full bg-tertiaryred-150 w-[20%] px-5 py-1">
               Cancel
             </button>
           </div>
@@ -78,8 +78,8 @@ const Online = () => {
         <button
           className={
             !isDisabledV
-              ? "bg-purple-500 text-white font-semibold px-3 py-3 mx-3 flex space-x-2 rounded-xl  items-center"
-              : "bg-slate-300 text-white font-semibold px-3 py-3 mx-3 flex space-x-2 rounded-xl  items-center"
+              ? "bg-tertiaryViolet text-tertiarywhite-100 font-semibold px-3 py-3 mx-3 flex space-x-2 rounded-xl  items-center"
+              : "bg-tertiarygrey-300 text-tertiarywhite-100 font-semibold px-3 py-3 mx-3 flex space-x-2 rounded-xl  items-center"
           }
           onClick={VideomodeHandler}
           disabled={isDisabledV}
@@ -97,8 +97,8 @@ const Online = () => {
         <button
           className={
             !isDisabledT
-              ? "bg-blue-500 text-white font-semibold px-3 py-3 mx-3 flex space-x-2 rounded-xl  items-center"
-              : "bg-slate-300 text-white font-semibold px-3 py-3 mx-3 flex space-x-2 rounded-xl  items-center"
+              ? "bg-tertiaryblue-50 text-tertiarywhite-100 font-semibold px-3 py-3 mx-3 flex space-x-2 rounded-xl  items-center"
+              : "bg-tertiarygrey-300 text-tertiarywhite-100 font-semibold px-3 py-3 mx-3 flex space-x-2 rounded-xl  items-center"
           }
           onClick={textmodeHandler}
           disabled={isDisabledT}
