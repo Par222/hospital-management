@@ -41,7 +41,7 @@ const Online = () => {
               Link will be generated shortly...
             </p>
           </div>
-          <div className="text-sm my-2 text-center text-red-500 w-full flex justify-center">
+          <div className="text-sm my-2 text-center text-tertiaryred-150 w-full flex justify-center">
             Kindly proceed to payment
           </div>
         </>

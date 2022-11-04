@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DoctorCard from "./DoctorCard";
 import {ClassicSpinner} from "react-spinners-kit"
 import axios from "axios";
-const DoctorList = ({ expertise,fees}) => {
+const DoctorList = ({ expertise,fees,keyWord,isSearched}) => {
   let [filteredArray, setFilteredArray] = useState([]);
   const [docArray,setDocArray]=useState([])
   const [isLoading,setIsLoading]=useState(false)
@@ -17,6 +17,15 @@ const DoctorList = ({ expertise,fees}) => {
   
 
   }
+  const fetchSearchDoctors=async()=>{
+    let result;
+    
+    result=await axios.get(`http://localhost:5000/api/doctors/search/${keyWord}`)
+    console.log(result.data)
+    setFilteredArray(result.data.doctors)
+  
+
+  }
   useEffect(()=>{
     setIsLoading(true)
     fetchDoctors().then(()=>{
@@ -25,6 +34,17 @@ const DoctorList = ({ expertise,fees}) => {
     })
 
   },[])
+  useEffect(()=>{
+    console.log('keyword',isSearched)
+    if(isSearched){
+    setIsLoading(true)
+    fetchSearchDoctors().then(()=>{
+      setIsLoading(false)
+      
+    })
+  }
+
+  },[isSearched])
   useEffect(()=>{
     if(docArray)
     {

@@ -3,9 +3,11 @@ import NavBar from "../../components/common/NavBar";
 import DoctorList from "../../components/doctor/DoctorList";
 import styles from "../../styles/Home.module.css";
 import SearchIcon from "../../components/common/icons/Search";
+import axios from "axios";
 const Index = (props) => {
   const [fees, setFees] = useState("any");
   const [type, setType] = useState("All");
+  const [isSearched, setIsSearched] = useState(false);
   const [keyWord, setkeyWord] = useState("");
 
   const filterHandler = (event) => {
@@ -15,7 +17,14 @@ const Index = (props) => {
   const feesHandler = (e) => {
     setFees(e.target.value);
   };
-  const handleSearch = () => {};
+
+  const handleSearch = (e) => {
+    console.log(keyWord);
+    if (e.key == "Enter") {
+      e.preventDefault();
+      setIsSearched(true);
+    }
+  };
   const categories = [
     "All",
     "Heart",
@@ -26,7 +35,6 @@ const Index = (props) => {
     "Skin",
   ];
   return (
-  
     <>
       <NavBar></NavBar>
       <div className={`h-[700px] flex ${styles.doc}`}>
@@ -80,6 +88,7 @@ const Index = (props) => {
               value={keyWord}
               onChange={(event) => {
                 setkeyWord(event.target.value);
+                setIsSearched(false);
               }}
               onKeyDown={handleSearch}
             />
@@ -102,32 +111,40 @@ const Index = (props) => {
         </div>
       </div>
       <div className="w-full flex">
-        <DoctorList expertise={type} fees={fees}></DoctorList>
+        <DoctorList
+          expertise={type}
+          fees={fees}
+          keyWord={keyWord}
+          isSearched={isSearched}
+        ></DoctorList>
         <div className="px-9 py-6 shadow-md  h-fit my-20 font-Heading mr-5 bg-tertiarywhite-50">
-            <h1 className="text-blackShade-50 text-2xl font-bold font-Heading py-4">Filters</h1>
-            <div className="flex h-1 w-full rounded-md ">
-                <div className="h-1 w-[20%] bg-tertiaryblue-50 rounded-md"></div><div className="h-1 w-[80%] bg-tertiarygrey-575 rounded-md"></div>
-            </div>
-            <form className="flex flex-col" onSubmit={(e)=>e.preventDefault()}>
-            <label htmlFor="doctors" className="text-base text-white font-semibold my-2">
-            Consultation Fees
-          </label>
-          <select
-            name="doctors"
-            onChange={feesHandler}
-            className="rounded-md w-[100%] border border-r-navyblue-900 font-display bg-tertiaryblue-60  py-2 text-left"
-          >
-            <option value="any">Any</option>
-            <option value="500">500</option>
-            <option value="1000">1000</option>
-            <option value="1500">1500</option>
-            <option value="2000">2000</option>
-            <option value="3000">3000</option>
-          </select>
-         
-            </form>
-            
-
+          <h1 className="text-blackShade-50 text-2xl font-bold font-Heading py-4">
+            Filters
+          </h1>
+          <div className="flex h-1 w-full rounded-md ">
+            <div className="h-1 w-[20%] bg-tertiaryblue-50 rounded-md"></div>
+            <div className="h-1 w-[80%] bg-tertiarygrey-575 rounded-md"></div>
+          </div>
+          <form className="flex flex-col" onSubmit={(e) => e.preventDefault()}>
+            <label
+              htmlFor="doctors"
+              className="text-base text-white font-semibold my-2"
+            >
+              Consultation Fees
+            </label>
+            <select
+              name="doctors"
+              onChange={feesHandler}
+              className="rounded-md w-[100%] border border-r-navyblue-900 font-display bg-tertiaryblue-60  py-2 text-left"
+            >
+              <option value="any">Any</option>
+              <option value="500">500</option>
+              <option value="1000">1000</option>
+              <option value="1500">1500</option>
+              <option value="2000">2000</option>
+              <option value="3000">3000</option>
+            </select>
+          </form>
         </div>
       </div>
     </>

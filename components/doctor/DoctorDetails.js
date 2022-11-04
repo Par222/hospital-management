@@ -3,6 +3,8 @@ import ReactImageGallery from "react-image-gallery";
 import GenericModal from "../common/GenericModal";
 import Book from "../appointments/Book";
 import Slots from "../appointments/Slots";
+import Star from "../common/icons/Star";
+import Education from "../common/icons/Education";
 const DoctorDetails = (props) => {
   console.log(props.certificates);
   const [posText, setPostText] = useState("Next");
@@ -33,7 +35,41 @@ const DoctorDetails = (props) => {
     if (step == 2) setTitle("Mode of Appointment");
     if (step == 3) setTitle("Payment");
   }, [step]);
-
+  let i = 0;
+  const handleStars = () => {
+    if (props.rating == 4) {
+      return (
+        <>
+          <Star></Star>
+          <Star></Star>
+          <Star></Star>
+          <Star></Star>
+        </>
+      );
+    }
+    if (props.rating == 5) {
+      return (
+        <>
+          <Star></Star>
+          <Star></Star>
+          <Star></Star>
+          <Star></Star>
+          <Star></Star>
+        </>
+      );
+    }
+    if(props.rating==3)
+    {
+    return(
+      <>
+      <Star></Star>
+      <Star></Star>
+      <Star></Star>
+      
+      </>
+    )
+    }
+  };
   return (
     <>
       {showModal && (
@@ -55,52 +91,61 @@ const DoctorDetails = (props) => {
             <span
               className={
                 step == 1
-                  ? `bg-blue-900 w-10 h-1 rounded-md`
-                  : `bg-blue-100 w-10 h-1 rounded-md`
+                  ? `bg-navyblue-900 w-10 h-1 rounded-md`
+                  : `bg-tertiaryblue-60 w-10 h-1 rounded-md`
               }
             ></span>
             <span
               className={
                 step == 2
-                  ? `bg-blue-900 w-10 h-1 rounded-md`
-                  : `bg-blue-100 w-10 h-1 rounded-md`
+                  ? `bg-navyblue-900 w-10 h-1 rounded-md`
+                  : `bg-tertiaryblue-60 w-10 h-1 rounded-md`
               }
             ></span>
             <span
               className={
                 step == 3
-                  ? `bg-blue-900 w-10 h-1 rounded-md`
-                  : `bg-blue-100 w-10 h-1 rounded-md`
+                  ? `bg-navyblue-900 w-10 h-1 rounded-md`
+                  : `bg-tertiaryblue-60 w-10 h-1 rounded-md`
               }
             ></span>
           </div>
         </GenericModal>
       )}
-      <div className={showModal && "h-[85vh] overflow-hidden"}>
+      <div className={showModal && "h-[0vh] overflow-hidden"}>
         <div className="flex  justify-center my-5 font-display ">
           <div className="opacity-100 bg-tertiarygrey-575 w-[90%]  rounded-md mt-10 ml-10 flex ">
             <div className="w-[30%]  flex items-center  ">
               <div className="h-full bg-tertiaryblue-50 w-10 "></div>
               <div className="h-full flex flex-col justify-center">
-                <div className="h-8 w-[50%] bg-tertiaryblue-50 rounded-r-full"></div>
+                <div className="h-8 w-[50%] bg-tertiaryblue-50 rounded-r-md"></div>
 
                 <img
                   src={props.image}
                   className="w-[100%] h-[90%] rounded-md "
                 ></img>
-                <div className="h-8 w-[50%] bg-tertiaryblue-50 rounded-r-full"></div>
-
+                <div className="h-8 w-[50%] bg-tertiaryblue-50 rounded-r-md"></div>
               </div>
             </div>
-            <div className="flex flex-col w-[70%]">
-              <h1 className="font-bold text-3xl px-3 text-center text-blue-700 border-b-4 border-blue-800">
+            <div className="flex flex-col w-[70%] justify-start">
+              <h1 className="font-bold text-3xl px-7 text-left text-navyblue-900 mt-10">
                 {props.name}
               </h1>
-              <p className="text-center text-xl my-3  text-slate-900 font-semibold">{`Specialization in ${props.expertise} problems`}</p>
-              <p className="pb-4 pt-2 px-7  text-gray-600 italic w-[100%] text-center ">
+              <p className="text-left text-xl my-3 px-7 text-tertiaryblue-50 font-base font-Heading">{`Specialization in ${props.expertise} problems`}</p>
+              <div className="flex px-7 my-1 ">{handleStars()}</div>
+              {<div className="flex flex-col mx-7">
+              <h1 className="font-semibold border-l-4 border-l-tertiaryblue-50 text-2xl px-2  text-left text-tertiaryblue-50 my-2 font-Heading">
+                Education
+              </h1>
+              {props.education && props.education.map((ed)=><div className="font-display text-base my-2 flex space-x-2 items-center"><span className="bg-tertiaryblue-60 p-2 rounded-full hover:bg-tertiaryblue-50 hover:transition-all"><Education></Education></span><span>{ed}</span></div>)}
+              </div>}
+              <h1 className="font-semibold text-2xl mx-7 px-2 font-Heading text-left text-tertiaryblue-50 my-2 border-l-4 border-l-tertiaryblue-50">
+                Additional Information
+              </h1>
+              <p className="pb-4 pt-2 px-7  text-gray-600  text-sm w-[100%] text-left ">
                 {props.des}
               </p>
-              <div className="flex w-full justify-center my-5">
+              <div className="flex w-full px-7 my-3">
                 <button
                   className="bg-tertiaryViolet text-tertiarywhite-100  text-base rounded-md px-6 py-2"
                   onClick={openHandler}
@@ -111,21 +156,6 @@ const DoctorDetails = (props) => {
             </div>
           </div>
         </div>
-
-        {props.certificates && (
-          <div className="flex my-5 mx-14 ">
-            <div className="opacity-100 bg-sblu-100 w-[100%]  bg-blue-500  rounded-md  ml-10 flex flex-col space-x-2">
-              <h1 className="font-bold text-3xl py-3 px-3 text-center text-white border-b-4 border-white w-full">
-                Certificates
-              </h1>
-              <div className="flex flex-wrap space-x-4 items-center justify-center">
-                {props.certificates.map((certificate) => (
-                  <img src={certificate} className="w-[30%] py-10 h-[400px]" />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );
