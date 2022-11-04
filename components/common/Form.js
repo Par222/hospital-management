@@ -57,10 +57,10 @@ const Form = (props) => {
             }
           }
         );
-        console.log(result);
         if (result.ok) {
           const data = await result.json()
-          authCtx.onLogin(data.idToken, new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).getTime()) 
+          console.log(data)
+          authCtx.onLogin(data.idToken, data.refreshToken, new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).getTime()) 
           router.push("/patient")
         }
         else {
@@ -84,10 +84,10 @@ const Form = (props) => {
             }),
           }
         );
-        console.log(result)
         if (result.ok) {
           const data = await result.json()
-          authCtx.onLogin(data.idToken, new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).getTime()) 
+          console.log(data)
+          authCtx.onLogin(data.idToken, data.refreshToken, new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).getTime()) 
           router.push("/patient");
           console.log(result)
         }
