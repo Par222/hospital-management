@@ -1,6 +1,6 @@
 import React, { useReducer, useContext, useEffect } from "react";
 import { appointments as todayAppointments } from "../../components/ScheduleAppointments/TodayAppointments";
-// import 
+import axios from "axios";
 
 const defaultAppointmentsState = [];
 
@@ -46,9 +46,9 @@ export function AppointmentContextProvider(props) {
     defaultAppointmentsState
   );
 
-  // const fetchAppointmentsHandler = async () => {
-  //   const appointmentsData = await axi
-  // }
+  const fetchAppointmentsHandler = async () => {
+    // const appointmentsData = await axios
+  }
 
   const addAppointmentHandler = (appointment) => {
     appointmentsDispatchFunction({

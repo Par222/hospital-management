@@ -23,6 +23,7 @@
     "@mui/lab": "^5.0.0-alpha.100",
     "@mui/material": "^5.10.6",
     "@mui/x-date-pickers": "^5.0.2",
+    "axios": "^0.24.0",
     "chart.js": "^3.9.1",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.5",
