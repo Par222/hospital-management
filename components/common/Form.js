@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
 import AuthContext from "../../store/auth-context";
-
+import axios from "axios";
 const Form = (props) => {
   const authCtx = useContext(AuthContext);
   const [email, setEmail] = useState("");
@@ -53,17 +53,34 @@ const Form = (props) => {
               returnSecureToken: true,
             }),
             headers: {
-              'Content-Type': 'application/json',
-            }
+              "Content-Type": "application/json",
+            },
           }
         );
         if (result.ok) {
-          const data = await result.json()
-          console.log(data)
-          authCtx.onLogin(data.idToken, data.refreshToken, new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).getTime()) 
-          router.push("/patient")
-        }
-        else {
+          const data = await result.json();
+          console.log(data, "auth");
+
+          await axios
+            .post(`http://localhost:5000/api/patient/login`, {
+              token: data.idToken,
+              name: name,
+              email: email,
+              password: password,
+            })
+            .then((details) => {
+              authCtx.onLogin(
+                data.idToken,
+                data.refreshToken,
+                new Date(
+                  new Date().getTime() + parseInt(data.expiresIn) * 1000
+                ).getTime(),
+                details?.data?.user?.id
+              );
+              router.push("/patient");
+            });
+          } 
+          else {
           toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
           });
@@ -85,13 +102,27 @@ const Form = (props) => {
           }
         );
         if (result.ok) {
-          const data = await result.json()
-          console.log(data)
-          authCtx.onLogin(data.idToken, data.refreshToken, new Date(new Date().getTime() + parseInt(data.expiresIn) * 1000).getTime()) 
-          router.push("/patient");
-          console.log(result)
-        }
-        else
+          const data = await result.json();
+          await axios
+            .post(`http://localhost:5000/api/patient/signup`, {
+              token: data.idToken,
+              name: name,
+              email: email,
+              password: password,
+            })
+            .then((details) => {
+              authCtx.onLogin(
+                data.idToken,
+                data.refreshToken,
+                new Date(
+                  new Date().getTime() + parseInt(data.expiresIn) * 1000
+                ).getTime(),
+                details?.data?.user?.id
+              );
+              router.push("/patient");
+              console.log(result);
+            });
+        } else
           toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
           });

@@ -1,8 +1,29 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext, useState } from "react";
+import AuthContext from "../../store/auth-context";
 const NavBar = (props) => {
+  const authCtx =useContext(AuthContext)
   const router = useRouter();
   console.log(router);
+  const [showFac, setShowFac] = useState(false);
+  const facilities = (
+    <div
+      className="border-t-2 border-tertiaryblue-50 flex flex-col absolute bg-tertiarywhite-50 top-19 rounded-sm mt-2 w-[200px]"
+      id="item"
+    >
+      <Link href="/doctors">
+        <a className="py-2 border-b-2 border-tertiarygrey-500 font font-bold text-sm font-display w-full px-5">
+          Doctors
+        </a>
+      </Link>
+      <Link href="/ambulance">
+        <a className="py-2 border-b-2 border-tertiarygrey-500 font font-bold text-sm px-5 font-display">
+          Ambulance
+        </a>
+      </Link>
+    </div>
+  );
   return (
     <div className="flex w-full">
       <div className="w-[25%] flex items-center space-x-6 bg-tertiaryblue-50 px-14 py-3 ">
@@ -24,34 +45,51 @@ const NavBar = (props) => {
           className="flex list-none space-x-20 items-center  px-10 text-[15px] f font-semibold w-[100%] font-Heading"
           id="links"
         >
-          <Link href="/patient">
-            <a className={router.pathname == "/patient" ? "active" : ""}>
-              Home
-            </a>
-          </Link>
-          <Link href={"/about"}>
-            <a className={router.pathname == "/about" ? "active" : ""}>
-              About Us
-            </a>
-          </Link>
-          <span className="cursor-pointer">Facilities</span>
-          <Link href="/department">
-            <a className={router.pathname == "/department" ? "active" : ""}>
-              Departments
-            </a>
-          </Link>
-          <Link href="/profile">
-            <a className={router.pathname == "/profile" ? "active" : ""}>
-              Profile
-            </a>
-          </Link>
+          <li onMouseOver={()=>setShowFac(false)}>
+            <Link href="/patient" >
+              <a className={router.pathname == "/patient" ? "active" : ""}>
+                Home
+              </a>
+            </Link>
+          </li>
+          <li onMouseOver={()=>setShowFac(false)}>
+            <Link href={"/about"}>
+              <a className={router.pathname == "/about" ? "active" : ""}>
+                About Us
+              </a>
+            </Link>
+          </li>
+          <li>
+            {" "}
+            <span className="cursor-pointer " id="fac" onMouseOver={()=>setShowFac(true)}>
+              <p>Facilities </p>
+              {showFac && facilities}
+            </span>
+          </li>
+
+          <li onMouseOver={()=>setShowFac(false)}>
+            {" "}
+            <Link href="/department">
+              <a className={router.pathname == "/department" ? "active" : ""}>
+                Departments
+              </a>
+            </Link>
+          </li>
+
+          <li onMouseOver={()=>setShowFac(false)}>
+            <Link href="/profile" >
+              <a className={router.pathname == "/profile" ? "active" : ""}>
+                Profile
+              </a>
+            </Link>
+          </li>
         </ul>
       </div>
-      <div className="w-[23%] flex items-center justify-center bg-tertiarywhite-50 space-x-10">
-        <button className=" w-[40%] text-tertiarywhite-100 bg-tertiaryblue-50 font-Heading text-lg font-semibold rounded-md px-2 py-2 ">
+      <div className="w-[23%] flex items-center justify-center bg-tertiarywhite-50 space-x-10" onMouseOver={()=>setShowFac(false)}>
+        <button className=" w-[40%] text-tertiarywhite-100 bg-tertiaryblue-50 font-Heading text-lg font-semibold rounded-md px-2 py-2 " onClick={()=>router.push(`/doctors`)}>
           Book Now
         </button>
-        <button className=" w-[40%] bg-tertiarygrey-200 text-tertiaryblue-50 font-Heading text-lg font-semibold rounded-md px-2 py-2 ">
+        <button className=" w-[40%] bg-tertiarygrey-200 text-tertiaryblue-50 font-Heading text-lg font-semibold rounded-md px-2 py-2 " onClick={()=>authCtx.onLogout()}>
           Logout
         </button>
       </div>

@@ -4,7 +4,7 @@ import styles from "../../styles/Login.module.css";
 
 const Index = () => {
   return (
-    <div className="w-full h-[100vh]  bg-gradient-to-r from-slate-300 to-slate-800 flex justify-center items-center">
+    <div className="w-full h-[100vh]  bg-gradient-to-r from-tertiaryblue-60 to-tertiaryblue-50 flex justify-center items-center">
       <div className="w-[70%] h-[80%] ">
         <Card className = "h-full">
           <div className="flex w-[60%] h-full rounded-lg">

@@ -8,12 +8,15 @@ import Medic from "../../components/common/icons/Medic";
 import About from "../../components/about/About";
 import Department from "../../components/departments/Department";
 import Experts from "../../components/doctor/Experts";
+import React from 'react'
+
 const Index = (props) => {
+  
   return (
     <>
       <NavBar></NavBar>
       <div className={`h-[500px] flex ${styles.home}`}>
-        <div className="flex flex-col mt-[4%] ml-[10%]  ">
+        <div className="flex flex-col mt-[4%] ml-[10%] bg-opacity-60  ">
           <div className="font-Heading text-base text-tertiaryblue-50 font-semibold">
             Welcome To Medicare
           </div>
@@ -59,6 +62,7 @@ const Index = (props) => {
       <div className="mt-5 ml-[5%]">
         <Experts></Experts>
       </div>
+      
     </>
   );
 };

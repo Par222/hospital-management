@@ -19,19 +19,22 @@ const Experts = () => {
       </div>
       <div className="my-10 flex space-x-10 justify-center w-full ">
         <DoctorCard
-          img="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+          image="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
           name="Dr. Anthony"
           expertise="Surgeon , Cardiologist"
+          preview={true}
         ></DoctorCard>
         <DoctorCard
-          img="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          image="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           name="Dr. Anna"
           expertise="Internist, General Practitioner"
+          preview={true}
         ></DoctorCard>
         <DoctorCard
-          img="https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          image="https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           name="Dr. Andrew"
           expertise="Internist, Orthopedic Surgeon"
+          preview={true}
         ></DoctorCard>
       </div>
     </div>

@@ -51,7 +51,7 @@ a {
   font-family: 'Courier Prime', monospace;
 }
 #nav{
-font-family: 'Anton', sans-serif;
+
 font-weight: 800;
 
 }
@@ -60,7 +60,7 @@ font-weight: 800;
  
  transform: skew(20deg) translateX(-16px);
 }
-#links span:hover,a:hover{
+#links #fac p:hover,a:hover{
   transition: 400ms;
   border-left:4px solid #165FCC ;
   border-radius: 1px;
@@ -143,3 +143,4 @@ transform: rotateZ(180deg);
  display: none;
  opacity: 1;
 }
+

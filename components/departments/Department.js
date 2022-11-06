@@ -1,4 +1,9 @@
 import DepartmentCore from "./DepartmentCore";
+import Heart from "../common/icons/Heart";
+import Lungs from "../common/icons/Lungs";
+import Brain from "../common/icons/Brain";
+import Tooth from "../common/icons/Tooth";
+import Eye from "../common/icons/Eye";
 import Pills from "../common/icons/Pills";
 const Department = () => {
   return (
@@ -21,11 +26,11 @@ const Department = () => {
       </div>
       <div className="flex w-[100%] flex-wrap">
         <DepartmentCore id="dep" title="Medicine"><Pills></Pills></DepartmentCore>
-        <DepartmentCore id="dep" title="Medicine"><Pills></Pills></DepartmentCore>
-        <DepartmentCore id="dep" title="Medicine"><Pills></Pills></DepartmentCore>
-        <DepartmentCore id="dep" title="Medicine"><Pills></Pills></DepartmentCore>
-        <DepartmentCore id="dep" title="Medicine"><Pills></Pills></DepartmentCore>
-        <DepartmentCore id="dep" title="Medicine"><Pills></Pills></DepartmentCore>
+        <DepartmentCore id="dep" title="Nuerology"><Brain></Brain></DepartmentCore>
+        <DepartmentCore id="dep" title="Eyecare"><Eye></Eye></DepartmentCore>
+        <DepartmentCore id="dep" title="Cardiology"><Heart></Heart></DepartmentCore>
+        <DepartmentCore id="dep" title="Dental Care"><Tooth></Tooth></DepartmentCore>
+        <DepartmentCore id="dep" title="Pulmonary"><Lungs></Lungs></DepartmentCore>
       </div>
     </div>
   );

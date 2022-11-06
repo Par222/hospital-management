@@ -1,3 +1,4 @@
+import Tags from "./Tags";
 const Blog = () => {
   return (
     <div>
@@ -6,6 +7,7 @@ const Blog = () => {
         <h1 className="text-3xl text-blackShade-50 font-Heading font-bold">
           Medical Specialty Health
         </h1>
+        <div className="flex space-x-10">
         <p className="w-[70%] my-4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, a
           odio! Quisquam libero impedit dicta rerum neque fuga nobis animi
@@ -38,6 +40,8 @@ const Blog = () => {
           text of the printing and typesetting industry. Lorem Ipsum has been
           the industry's.
         </p>
+        <Tags></Tags>
+        </div>
         
       </div>
       <div>
