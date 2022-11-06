@@ -5,12 +5,16 @@ import Doctor from "../../components/common/icons/Doctor";
 import styles from "../../styles/Home.module.css";
 import Information from "../../components/about/Information";
 import Choose from "../../components/about/Choose";
+import AuthContext from "../../store/auth-context";
+import { useContext } from "react";
 const Index = () => {
+  const ctx=useContext(AuthContext)
+  console.log(ctx.token,ctx.id)
   return (
     <>
       <NavBar></NavBar>
-      <div className={`h-[700px] flex ${styles.about}`}>
-        <div className="flex flex-col mt-[8%] ml-[10%] justify-center  ">
+      <div className={`h-[700px] flex ${styles.about} bg-opacity-30`}>
+        <div className="flex flex-col mt-[8%] ml-[10%] justify-center   ">
           <div className="font-Heading text-lg text-tertiaryblue-50 font-semibold">
             About Us
           </div>

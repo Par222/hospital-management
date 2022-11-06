@@ -128,7 +128,7 @@ const Index = (props) => {
           <form className="flex flex-col" onSubmit={(e) => e.preventDefault()}>
             <label
               htmlFor="doctors"
-              className="text-base text-white font-semibold my-2"
+              className="text-base text-blackShade-50 font-semibold my-2"
             >
               Consultation Fees
             </label>

@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "../../store/auth-context";
 const NavBar = (props) => {
+  const authCtx =useContext(AuthContext)
   const router = useRouter();
   console.log(router);
   const [showFac, setShowFac] = useState(false);
@@ -84,10 +86,10 @@ const NavBar = (props) => {
         </ul>
       </div>
       <div className="w-[23%] flex items-center justify-center bg-tertiarywhite-50 space-x-10" onMouseOver={()=>setShowFac(false)}>
-        <button className=" w-[40%] text-tertiarywhite-100 bg-tertiaryblue-50 font-Heading text-lg font-semibold rounded-md px-2 py-2 ">
+        <button className=" w-[40%] text-tertiarywhite-100 bg-tertiaryblue-50 font-Heading text-lg font-semibold rounded-md px-2 py-2 " onClick={()=>router.push(`/doctors`)}>
           Book Now
         </button>
-        <button className=" w-[40%] bg-tertiarygrey-200 text-tertiaryblue-50 font-Heading text-lg font-semibold rounded-md px-2 py-2 ">
+        <button className=" w-[40%] bg-tertiarygrey-200 text-tertiaryblue-50 font-Heading text-lg font-semibold rounded-md px-2 py-2 " onClick={()=>authCtx.onLogout()}>
           Logout
         </button>
       </div>

@@ -74,23 +74,6 @@ const DoctorList = ({ expertise,fees,keyWord,isSearched}) => {
   },[filteredArray])
 
 
-  /*useEffect(() => {
-    console.log(filteredArray, fees, type);
-    if (fees == "any" && type == "all") setFilteredArray(DUMMY_DOCTORS);
-    else if (fees == "any" && type != "all") {
-      setFilteredArray(
-        DUMMY_DOCTORS.filter((doc) => doc.category.toLowerCase() == type)
-      );
-    } else if (type == "all" && fees != "any") {
-      setFilteredArray(DUMMY_DOCTORS.filter((doc) => doc.fees <= +fees));
-    } else {
-      setFilteredArray(
-        DUMMY_DOCTORS.filter(
-          (doc) => doc.category.toLowerCase() == type && doc.fees <= +fees
-        )
-      );
-    }
-  }, [fees, type]);*/
   
   
   return (

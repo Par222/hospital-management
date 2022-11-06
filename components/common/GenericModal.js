@@ -13,9 +13,9 @@ const GenericModal = (props) => {
 
           <div className="my-5">{props.children}</div>
           {!props.isStepModal && (
-            <div className="flex w-full justify-end space-x-3 px-5 mt-5 mb-5">
+            <div className="flex w-full justify-end space-x-3 px-5 mt-5 mb-2">
               <button
-                className="bg-tertiaryblue-50 text-tertiarywhite-100 px-6 py-1 rounded-full"
+                className={props.disabled?"bg-tertiarygrey-400 text-tertiarywhite-100 px-6 py-1 rounded-full":"bg-tertiaryblue-50 text-tertiarywhite-100 px-6 py-1 rounded-full"}
                 onClick={props.posHandler}
               >
                 {props.posText}
@@ -26,6 +26,7 @@ const GenericModal = (props) => {
               >
                 {props.negText}
               </button>
+              
             </div>
           )}
             <div className="flex w-full justify-end space-x-3 px-5 mt-5 mb-5">

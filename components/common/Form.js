@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
+import AuthContext from "../../store/auth-context";
+import axios from "axios";
 const Form = (props) => {
+  const authCtx = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -49,11 +52,35 @@ const Form = (props) => {
               password: password,
               returnSecureToken: true,
             }),
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         );
-        console.log(result);
-        if (result.ok) router.push("/patient");
-        else {
+        if (result.ok) {
+          const data = await result.json();
+          console.log(data, "auth");
+
+          await axios
+            .post(`http://localhost:5000/api/patient/login`, {
+              token: data.idToken,
+              name: name,
+              email: email,
+              password: password,
+            })
+            .then((details) => {
+              authCtx.onLogin(
+                data.idToken,
+                data.refreshToken,
+                new Date(
+                  new Date().getTime() + parseInt(data.expiresIn) * 1000
+                ).getTime(),
+                details?.data?.user?.id
+              );
+              router.push("/patient");
+            });
+          } 
+          else {
           toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
           });
@@ -74,8 +101,28 @@ const Form = (props) => {
             }),
           }
         );
-        if (result.ok) router.push("/patient");
-        else
+        if (result.ok) {
+          const data = await result.json();
+          await axios
+            .post(`http://localhost:5000/api/patient/signup`, {
+              token: data.idToken,
+              name: name,
+              email: email,
+              password: password,
+            })
+            .then((details) => {
+              authCtx.onLogin(
+                data.idToken,
+                data.refreshToken,
+                new Date(
+                  new Date().getTime() + parseInt(data.expiresIn) * 1000
+                ).getTime(),
+                details?.data?.user?.id
+              );
+              router.push("/patient");
+              console.log(result);
+            });
+        } else
           toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
           });
@@ -156,7 +203,7 @@ const Form = (props) => {
           ></input>
           {!passwordIsValid && passwordIsBlur && (
             <p className="text-red-600 text-sm mb-1 ">
-              Minimun 7 characters needed
+              Minimum 7 characters needed
             </p>
           )}
           <button
