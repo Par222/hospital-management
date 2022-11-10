@@ -5,6 +5,9 @@ import Book from "../appointments/Book";
 import Slots from "../appointments/Slots";
 import Star from "../common/icons/Star";
 import Education from "../common/icons/Education";
+import { Appointment } from "../context/AppointmentContext";
+import AuthContext from "../../store/auth-context";
+import { useContext } from "react";
 const DoctorDetails = (props) => {
   console.log(props.certificates);
   const [posText, setPostText] = useState("Next");
@@ -13,19 +16,28 @@ const DoctorDetails = (props) => {
   const [step, setStep] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const ctx=useContext(Appointment)
+  const auth=useContext(AuthContext)
   const posHandler = () => {
     setStep(step + 1);
   };
   const negHandler = () => {
     setStep(step - 1);
   };
-  const saveHandler = () => {};
+  const saveHandler = () => {
+    ctx.createAppointment("Pending")
+    closeHandler()
+  };
   const closeHandler = () => {
     setShowModal(false);
   };
   const openHandler = () => {
     setShowModal(true);
   };
+  useEffect(()=>{
+  ctx.updateAppointmentStep3(auth.id,props.id,props.expertise)
+  console.log(ctx.appointment)
+  },[])
   useEffect(() => {
     if (step == 3) setPostText("Book Now");
     else setPostText("Next");
@@ -86,7 +98,7 @@ const DoctorDetails = (props) => {
           isNeg={true}
           isStepModal={true}
         >
-          <Slots step={step} />
+          <Slots step={step} props={props} />
           <div className="flex justify-center w-[100%] space-x-3 mt-10">
             <span
               className={

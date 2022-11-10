@@ -10,7 +10,7 @@ const Book = (props) => {
   const [unAvailable,setUnavailable]=useState(false)
   useEffect(()=>{
  
-    console.log(moment(value))
+    props.dateHandler(value.toDate())
 
   },[value])
   return (

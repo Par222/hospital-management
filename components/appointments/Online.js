@@ -6,14 +6,25 @@ import "react-quill/dist/quill.snow.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ReactImageGallery from "react-image-gallery";
 const ReactQuill=dynamic(import('react-quill'),{ssr:false})
+import AuthContext from "../../store/auth-context";
+import { Appointment } from "../context/AppointmentContext";
+import { useContext } from "react";
 const Online = () => {
   const [isVideo, setIsVideo] = useState(false);
-  const [isText, setIsText] = useState(false);
+  const [isText, setIsText] = useState(true);
   const [isDisabledT, setIsDisabledT] = useState(false);
   const [isDisabledV, setIsDisabledV] = useState(false);
   const [checkImage, secheckImage] = useState(false);
   const [IllDes, setIllDes] = useState("");
   const [imageArray, setImageArray] = useState([]);
+   const ctx=useContext(Appointment)
+
+   useEffect(()=>{
+    ctx.updateAppointmentStep2(isVideo?"Video":"Text",IllDes.replaceAll("<[^>]*>", ""),imageArray.map((file)=>URL.createObjectURL(file)))
+   
+    console.log(ctx.appointment)
+   },[isVideo,IllDes,imageArray])
+
   const upload = (accepted, rejected) => {
     setImageArray([...imageArray, ...accepted]);
   };

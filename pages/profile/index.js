@@ -12,11 +12,11 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import DropFiles from "../../components/common/DropFiles";
-import GenericModal from "../../components/common/GenericModal";
 import ReactImageGallery from "react-image-gallery";
 import Request from "../../components/ambulance/AmbulanceReq/Request";
 import axios from "axios";
-
+import GenericModal from "../../components/common/GenericModal";
+import AppRequest from "../../components/appointments/AppointmentReq";
 const Index = () => {
   const ctx = useContext(AuthContext);
   console.log(ctx.token, ctx.id);
@@ -32,6 +32,22 @@ const Index = () => {
   const [image, setImage] = useState("");
   const [ambReq, setAmbReq] = useState("");
   const [imageArray, setImageArray] = useState([]);
+  const [ambModal, setAmbModal] = useState(false);
+  const [appReq, setAppReq] = useState(false);
+  const[appModal,setAppModal]=useState(false);
+
+  const openHandler = () => {
+    setAmbModal(true);
+  };
+  const closeHandler = () => {
+    setAmbModal(false);
+  };
+  const openAppHandler=()=>{
+    setAppModal(true)
+  }
+  const closeAppHandler=()=>{
+    setAppModal(false)
+  }
   console.log("ID", ctx.id);
   const fetchProfile = async () => {
     try {
@@ -53,6 +69,16 @@ const Index = () => {
         `http://localhost:5000/api/request/${ctx.id}`
       );
       setAmbReq(result.data.requests);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const fetchAppointments = async () => {
+    try {
+      const result = await axios.get(
+        `http://localhost:5000/api/appointments/patient-appointment-list/${ctx.id}`
+      );
+      setAppReq(result.data.appointments);
     } catch (err) {
       console.log(err);
     }
@@ -95,6 +121,14 @@ const Index = () => {
     }
   }, [ctx.id, profile]);
   useEffect(() => {
+    if (profile) {
+      setIsLoading(true);
+      fetchAppointments().then(() => {
+        setIsLoading(false);
+      });
+    }
+  }, [ctx.id, app]);
+  useEffect(() => {
     if (amb) {
       setIsLoading(true);
       fetchAmbulance().then(() => {
@@ -132,63 +166,65 @@ const Index = () => {
           showModal ? "h-[0vh] overflow-hidden" : "flex items-center flex-col"
         }
       >
-        <div className="bg-tertiarywhite-50  my-10 rounded-md w-[80%] shadow-md">
-          <div className=" flex justify-evenly pb-0  text-2xl font-Heading font-semibold cursor-pointer transition-all">
-            <span
-              className={
-                profile ? "border-b-4 border-tertiaryblue-50 py-3" : "py-3"
-              }
-              onClick={() => {
-                setProfile(true);
-                setPayment(false);
-                setAmb(false);
-                setApp(false);
-              }}
-            >
-              Profile Summary
-            </span>
-            <span
-              className={
-                Payment ? "border-b-4 border-tertiaryblue-50 py-3" : "py-3"
-              }
-              onClick={() => {
-                setProfile(false);
-                setPayment(true);
-                setAmb(false);
-                setApp(false);
-              }}
-            >
-              Payment
-            </span>
-            <span
-              className={
-                app ? "border-b-4 border-tertiaryblue-50 py-3" : "py-3"
-              }
-              onClick={() => {
-                setProfile(false);
-                setPayment(false);
-                setAmb(false);
-                setApp(true);
-              }}
-            >
-              {" "}
-              Appointments
-            </span>
-            <span
-              className={
-                amb ? "border-b-4 border-tertiaryblue-50 py-3" : "py-3"
-              }
-              onClick={() => {
-                setProfile(false);
-                setPayment(false);
-                setAmb(true);
-                setApp(false);
-              }}
-            >
-              Ambulance Status
-            </span>
+        {!ambModal && (
+          <div className="bg-tertiarywhite-50  my-10 rounded-md w-[80%] shadow-md">
+            <div className=" flex justify-evenly pb-0  text-2xl font-Heading font-semibold cursor-pointer transition-all">
+              <span
+                className={
+                  profile ? "border-b-4 border-tertiaryblue-50 py-3" : "py-3"
+                }
+                onClick={() => {
+                  setProfile(true);
+                  setPayment(false);
+                  setAmb(false);
+                  setApp(false);
+                }}
+              >
+                Profile Summary
+              </span>
+              <span
+                className={
+                  Payment ? "border-b-4 border-tertiaryblue-50 py-3" : "py-3"
+                }
+                onClick={() => {
+                  setProfile(false);
+                  setPayment(true);
+                  setAmb(false);
+                  setApp(false);
+                }}
+              >
+                Payment
+              </span>
+              <span
+                className={
+                  app ? "border-b-4 border-tertiaryblue-50 py-3" : "py-3"
+                }
+                onClick={() => {
+                  setProfile(false);
+                  setPayment(false);
+                  setAmb(false);
+                  setApp(true);
+                }}
+              >
+                {" "}
+                Appointments
+              </span>
+              <span
+                className={
+                  amb ? "border-b-4 border-tertiaryblue-50 py-3" : "py-3"
+                }
+                onClick={() => {
+                  setProfile(false);
+                  setPayment(false);
+                  setAmb(true);
+                  setApp(false);
+                }}
+              >
+                Ambulance Status
+              </span>
+            </div>
           </div>
-        </div>
+        )}
         {isLoading && (
           <div className="flex justify-center w-full h-full">
             <ClassicSpinner size="30" color="#165FCC"></ClassicSpinner>
@@ -290,15 +326,53 @@ const Index = () => {
             )}
           </div>
         )}
-        {amb && <div className="my-5 w-[80%] flex justify-center flex-col items-center">
-        <div className="w-[100%] justify-evenly text-xl my-4 py-5 rounded-md font-semibold text-blackShade-50 bg-tertiarywhite-50  flex shadow-md">
-          <div className="w-[20%] text-center">Patient Name</div>
-          <div className="w-[25%] text-center">Contact</div>
-          <div className="w-[35%] text-left">Emergency</div>
-          <div className="w-[10%] text-center ">Status</div>
-        </div>
-        {ambReq && ambReq.map((amb) => <Request {...amb}></Request>)}
-        </div>}
+        {amb && (
+          <div
+            className={
+              !ambModal
+                ? "my-5 w-[80%] flex justify-center flex-col items-center"
+                : "h-[0vh] overflow-hidden"
+            }
+          >
+            <div className="w-[100%] justify-evenly text-xl my-4 py-5 rounded-md font-semibold text-blackShade-50 bg-tertiarywhite-50  flex shadow-md">
+              <div className="w-[20%] text-center">Patient Name</div>
+              <div className="w-[25%] text-center">Contact</div>
+              <div className="w-[35%] text-left">Emergency</div>
+              <div className="w-[10%] text-center ">Status</div>
+            </div>
+            {ambReq &&
+              ambReq.map((amb) => (
+                <Request
+                  {...amb}
+                  openHandler={openHandler}
+                  closeHandler={closeHandler}
+                ></Request>
+              ))}
+          </div>
+        )}
+        {app && (
+          <div
+            className={
+              !appModal
+                ? "my-5 w-[80%] flex justify-center flex-col items-center"
+                : "h-[0vh] overflow-hidden"
+            }
+          >
+            <div className="w-[100%] justify-evenly text-xl my-4 py-5 rounded-md font-semibold text-blackShade-50 bg-tertiarywhite-50  flex shadow-md">
+              <div className="w-[15%] text-center">Date</div>
+              <div className="w-[15%] text-center">Start Time</div>
+              <div className="w-[15%] text-center">Mode</div>
+              <div className="w-[10%] text-center ">Status</div>
+              <div className="w-[15%] text-center ">Disease Category</div>
+            </div>
+            {appReq &&
+              appReq.map((app) => (
+                <AppRequest {...app}   openHandler={openAppHandler}
+                closeHandler={closeAppHandler}></AppRequest>
+              
+              ))}
+          </div>
+        )}
       </div>
       <ToastContainer></ToastContainer>
     </>
