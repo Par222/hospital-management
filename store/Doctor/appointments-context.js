@@ -1,6 +1,6 @@
-import React, { useReducer, useContext, useEffect } from "react";
-import { appointments as todayAppointments } from "../../components/ScheduleAppointments/TodayAppointments";
+import React, { useReducer, useContext, useEffect, useCallback } from "react";
 import axios from "axios";
+import AuthContext from "../auth-context";
 
 const defaultAppointmentsState = [];
 
@@ -15,10 +15,9 @@ export default AppointmentsContext;
 
 function appointmentsReducer(state, action) {
   if (action.type === "SET_APPOINTMENTS") {
-    return action.value.appointments;
+    return action.value;
   }
   if (action.type === "ADD_APPOINTMENT") {
-    console.log(state);
     const newAppointments = state.concat(action.value);
     return newAppointments;
   }
@@ -46,14 +45,28 @@ export function AppointmentContextProvider(props) {
     defaultAppointmentsState
   );
 
-  const fetchAppointmentsHandler = async () => {
-    // const appointmentsData = await axios
-  }
+  const authCtx = useContext(AuthContext);
 
-  const addAppointmentHandler = (appointment) => {
+  const fetchAppointmentsHandler = useCallback(async () => {
+    const appointmentsData = await axios.get(
+      `http://localhost:5000/api/appointments/doctor-appointment-list/${authCtx.id}`
+    );
+    appointmentsDispatchFunction({
+      type: "SET_APPOINTMENTS",
+      value: appointmentsData?.data?.appointments,
+    });
+  }, [authCtx.id]);
+
+  const addAppointmentHandler = async (appointment) => {
+    const newAppointment = await axios.post(
+      "http://localhost:5000/api/appointments",
+      {
+        appointment: appointment,
+      }
+    );
     appointmentsDispatchFunction({
       type: "ADD_APPOINTMENT",
-      value: appointment,
+      value: newAppointment?.data,
     });
   };
 
@@ -64,12 +77,21 @@ export function AppointmentContextProvider(props) {
     });
   };
 
-  const editAppointmentHandler = (appointment) => {
+  const editAppointmentHandler = async (appointment) => {
+    const editedAppointment = await axios.patch(`http://localhost:5000/api/appointments/${appointment.id}`);
     appointmentsDispatchFunction({
       type: "EDIT_APPOINTMENT",
-      value: appointment,
+      value: editedAppointment?.result?.data?.appointment,
     });
   };
+
+  // const confirmAppointmentHandler = async (appointmentToBeConfirmed) => {
+    
+  //   appointmentsDispatchFunction({
+  //     type: "EDIT_APPOINTMENT",
+  //     value: appointment,
+  //   });
+  // };
 
   const appointmentsCtx = {
     appointments: appointmentsState,
@@ -79,8 +101,8 @@ export function AppointmentContextProvider(props) {
   };
 
   useEffect(() => {
-    
-  }, [])
+    fetchAppointmentsHandler();
+  }, []);
 
   return (
     <AppointmentsContext.Provider value={appointmentsCtx}>

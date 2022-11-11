@@ -32,10 +32,25 @@ import {
   Layout,
 } from "./AppointmentForm/CustomizedAppointmentForm";
 
-const currentDate = "2018-06-27";
+function getMillisecondsFromHours(timeInHours) {
+  const index = timeInHours.indexOf(":");
+  const hours = +timeInHours.substring(0, index);
+  const minutes = +timeInHours.substring(index + 1);
+  const milliseconds = hours * 3600 * 1000 + minutes * 60 * 1000;
+  return milliseconds;
+}
 
 function AppointmentCalendar(props) {
   const appointmentsCtx = useContext(AppointmentsContext);
+  const appointments = appointmentsCtx.appointments.map((item) => {
+    const startDate = new Date(item.appointment.slot.date.getTime() + getMillisecondsFromHours(item.appointment.slot.start_time));
+    return {
+      title: item.patientData.name,
+      startDate: startDate,
+      endDate: new Date(startDate.getTime() + 60 * 60 * 1000),
+      id: item.appointment.id
+    }
+  })
 
   const [addedAppointment, setAddedAppointment] = useState({});
   const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] =
@@ -135,7 +150,7 @@ function AppointmentCalendar(props) {
       header="Appointments"
       action={viewStateActions}
     >
-      <Scheduler data={appointmentsCtx.appointments} height={600}>
+      <Scheduler data={appointments} height={600}>
         <ViewState currentViewName={currentView} currentDate={new Date()} />
         <EditingState
           onCommitChanges={onCommitChanges}

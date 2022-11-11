@@ -7,10 +7,9 @@ import SearchBar from "./common/SearchBar";
 
 function Layout(props) {
   const authCtx = useContext(AuthContext);
-  const userType = "Doctor";
   return (
     <>
-      {userType === "Doctor" && (
+      {authCtx.userType === "Doctor" ? (
         <AppointmentContextProvider>
           <div className="flex min-h-screen ">
             <Sidebar />
@@ -20,6 +19,8 @@ function Layout(props) {
             </div>
           </div>
         </AppointmentContextProvider>
+      ) : (
+        props?.children
       )}
     </>
   );
