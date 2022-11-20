@@ -1286,7 +1286,7 @@
   "resolved" "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.10.6.tgz"
   "version" "5.10.6"
 
-"@mui/icons-material@>=5.0.0":
+"@mui/icons-material@^5.10.14", "@mui/icons-material@>=5.0.0":
   "integrity" "sha512-qtH60slQa+7MZRn6kyui8rKuoGDglPqaHX+pzBKNvd8JCOlrnfY5DmGGDdToTXyXl8xJ8nhANZbrbpg7UVKq/Q=="
   "resolved" "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.10.14.tgz"
   "version" "5.10.14"
