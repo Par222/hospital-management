@@ -52,7 +52,7 @@ const Index = () => {
   const fetchProfile = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:5000/api/patient/${ctx.id}`
+        `https://hm-project-finalbackend.herokuapp.com/api/patient/${ctx.id}`
       );
       setProfileDetails(result.data.user);
       console.log(result.data.user);
@@ -66,7 +66,7 @@ const Index = () => {
   const fetchAmbulance = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:5000/api/request/${ctx.id}`
+        `https://hm-project-finalbackend.herokuapp.com/api/request/${ctx.id}`
       );
       setAmbReq(result.data.requests);
     } catch (err) {
@@ -76,7 +76,7 @@ const Index = () => {
   const fetchAppointments = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:5000/api/appointments/patient-appointment-list/${ctx.id}`
+        `https://hm-project-finalbackend.herokuapp.com/api/appointments/patient-appointment-list/${ctx.id}`
       );
       setAppReq(result.data.appointments);
     } catch (err) {
@@ -96,7 +96,7 @@ const Index = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const result = await axios
-      .patch(`http://localhost:5000/api/patient/${ctx.id}`, {
+      .patch(`https://hm-project-finalbackend.herokuapp.com/api/patient/${ctx.id}`, {
         name: name,
         contact: contact,
         image: image,

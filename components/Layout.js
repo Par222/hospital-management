@@ -13,7 +13,7 @@ function Layout(props) {
   useEffect(() => {
     const getDoctorDetails = async () => {
       const doctor = await axios.get(
-        `http://localhost:5000/api/doctors/${authCtx?.id}`
+        `https://hm-project-finalbackend.herokuapp.com/api/doctors/${authCtx?.id}`
       );
       setDoctorDetails(doctor?.data?.doctor);
     };

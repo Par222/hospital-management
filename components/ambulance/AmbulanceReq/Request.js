@@ -25,7 +25,7 @@ const Request = (props) => {
   };
   const fetchAmbulancedetails = async () => {
     axios
-      .get(`http://localhost:5000/api/ambulance/${requestId}`)
+      .get(`https://hm-project-finalbackend.herokuapp.com/api/ambulance/${requestId}`)
       .then((result) => {
         fetchLocation(
           parseFloat(props.ambulance.location.lat),
