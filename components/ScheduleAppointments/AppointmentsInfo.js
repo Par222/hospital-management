@@ -4,7 +4,7 @@ import GenericModal from "../common/GenericModal";
 import { useRouter } from "next/router";
 import { useState, useContext } from "react";
 import AppointmentsContext from "../../store/Doctor/appointments-context";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 // export const DUMMY_APPOINTMENTS = [
 //   {
@@ -206,7 +206,7 @@ function AppointmentsInfo(props) {
         return appointment.appointment.id === appointmentID;
       }
     )[0].appointment;
-    const newAppointment = { ...requiredAppointment};
+    const newAppointment = { ...requiredAppointment };
     newAppointment.status.doctor = "Confirmed";
     appointmentsCtx.editAppointment(newAppointment);
   };
@@ -228,7 +228,7 @@ function AppointmentsInfo(props) {
         return appointment.appointment.id === appointmentID;
       }
     )[0].appointment;
-    const newAppointment = { ...requiredAppointment};
+    const newAppointment = { ...requiredAppointment };
     newAppointment.status.doctor = "Declined";
     appointmentsCtx.editAppointment(newAppointment);
   };
@@ -244,34 +244,38 @@ function AppointmentsInfo(props) {
     setIsModalVisible(true);
   };
 
-  const appointmentDetails = appointmentsCtx.appointments?.filter((item) => {
-    return item.appointment.status.doctor === "Pending";
-  }).map((appointment) => {
-    const onButtonClick = {
-      onConfirmAppointment: appointmentConfirmationHandler.bind(
-        this,
-        appointment.id
-      ),
-      onDeclineAppointment: appointmentDeclinationHandler.bind(
-        this,
-        appointment.id
-      ),
-    };
-    return (
-      <AppointmentDetailsListItem
-        key={appointment.appointment.id}
-        id={appointmentappointment.id}
-        name={appointment.patientData.name}
-        profilePicture={appointment.patientData.image}
-        date={appointment.appointment.slot.date}
-        time={appointment.appointment.slot.start_time}
-        status={appointment.appointment.status.doctor}
-        gender={appointment.patientData.gender}
-        {...onButtonClick}
-        onAppointmentClick={viewAppointmentDetailsHandler}
-      />
-    );
-  });
+  const appointmentDetails = appointmentsCtx.appointments
+    ?.filter((item) => {
+      return item?.appointment?.payment_status === "Pending";
+    })
+    console.log(appointmentDetails)
+  const pendingAppointments = appointmentDetails.map((appointment) => {
+      console.log(appointment)
+      const onButtonClick = {
+        onConfirmAppointment: appointmentConfirmationHandler.bind(
+          this,
+          appointment.id
+        ),
+        onDeclineAppointment: appointmentDeclinationHandler.bind(
+          this,
+          appointment.id
+        ),
+      };
+      return (
+        <AppointmentDetailsListItem
+          key={appointment?.appointment?.id}
+          id={appointment?.appointment?.id}
+          name={appointment?.patientData?.name}
+          profilePicture={appointment?.patientData?.image}
+          date={appointment?.appointment?.slot?.date}
+          time={appointment?.appointment?.slot.start_time}
+          status={appointment?.appointment?.status?.doctor}
+          gender={appointment?.patientData?.gender}
+          {...onButtonClick}
+          onAppointmentClick={viewAppointmentDetailsHandler}
+        />
+      );
+    });
 
   const viewAllAppointmentsHandler = () => {
     Router.push("/doctor/appointments");
@@ -299,7 +303,7 @@ function AppointmentsInfo(props) {
                 />
             </GenericModal> */}
       <AppointmentInfoCard
-        className="h-[500px] py-20 overflow-y-auto "
+        className="h-[500px] py-4 overflow-y-auto "
         header="Appointment Requests"
         action={
           <button
@@ -310,8 +314,8 @@ function AppointmentsInfo(props) {
           </button>
         }
       >
-        <ul className="w-[100%] flex flex-col justify-center">
-          {appointmentDetails}
+        <ul className="w-[100%] flex flex-col">
+          {pendingAppointments}
         </ul>
       </AppointmentInfoCard>
     </>
