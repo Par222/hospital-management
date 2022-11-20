@@ -6,7 +6,7 @@ const Index = () => {
   return (
     <div className="w-full h-[100vh]  bg-gradient-to-r from-tertiaryblue-60 to-tertiaryblue-50 flex justify-center items-center">
       <div className="w-[70%] h-[80%] ">
-        <Card className = "h-[625px]">
+        <Card className = "h-[625px] bg-white" >
           <div className="flex w-[60%] h-full rounded-lg">
             <img
               src="https://images.pexels.com/photos/5452196/pexels-photo-5452196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
