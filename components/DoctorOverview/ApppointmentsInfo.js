@@ -207,7 +207,7 @@ function AppointmentsInfo(props) {
       }
     )[0].appointment;
     const newAppointment = { ...requiredAppointment };
-    newAppointment.status.doctor = "Confirmed";
+    newAppointment.status = "Confirmed";
     appointmentsCtx.editAppointment(newAppointment);
   };
 
@@ -229,7 +229,7 @@ function AppointmentsInfo(props) {
       }
     )[0].appointment;
     const newAppointment = { ...requiredAppointment };
-    newAppointment.status.doctor = "Declined";
+    newAppointment.status = "Declined";
     appointmentsCtx.editAppointment(newAppointment);
   };
 
@@ -246,7 +246,7 @@ function AppointmentsInfo(props) {
 
   const appointmentDetails = appointmentsCtx.appointments
     ?.filter((item) => {
-      return item?.appointment?.status?.doctor === "Pending";
+      return item?.appointment?.status === "Pending";
     })
     console.log(appointmentDetails)
   const pendingAppointments = appointmentDetails.map((appointment) => {
@@ -269,7 +269,7 @@ function AppointmentsInfo(props) {
           profilePicture={appointment?.patientData?.image}
           date={appointment?.appointment?.slot?.date}
           time={appointment?.appointment?.slot.start_time}
-          status={appointment?.appointment?.status?.doctor}
+          status={appointment?.appointment?.status}
           gender={appointment?.patientData?.gender}
           {...onButtonClick}
           onAppointmentClick={viewAppointmentDetailsHandler}
