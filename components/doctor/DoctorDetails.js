@@ -25,7 +25,7 @@ const DoctorDetails = (props) => {
     setStep(step - 1);
   };
   const saveHandler = () => {
-    ctx.createAppointment("Pending")
+    ctx.createAppointment()
     closeHandler()
   };
   const closeHandler = () => {
