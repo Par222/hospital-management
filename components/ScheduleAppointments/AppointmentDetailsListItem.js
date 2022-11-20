@@ -56,7 +56,7 @@ function AppointmentDetailsListItem(props) {
       />
       <div className="m-2 mr-6 flex-grow">
         <p className="text-[13px] font-semibold">{props.name}</p>
-        <p className="text-[13px] text-gray-400">{`${props.gender}, ${props.date}, ${props.time}`}</p>
+        <p className="text-[13px] text-gray-400">{`${props.gender || "Male"}, ${props.date}, ${props.time}`}</p>
       </div>
       {confirmationStatusDiv}
     </li>

@@ -79,7 +79,9 @@ export function AppointmentContextProvider(props) {
   };
 
   const editAppointmentHandler = async (appointment) => {
-    const editedAppointment = await axios.patch(`http://localhost:5000/api/appointments/${appointment.id}`);
+    const editedAppointment = await axios.patch(`http://localhost:5000/api/appointments/${appointment.id}`, {
+      appointment: appointment,
+    });
     appointmentsDispatchFunction({
       type: "EDIT_APPOINTMENT",
       value: editedAppointment?.result?.data?.appointment,
