@@ -156,12 +156,13 @@ const Form = (props) => {
                 name: name,
                 email: email,
                 password: password,
-                image:
-                  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fdoctor&psig=AOvVaw36y9wNA8Q2InwDqjWu6G5E&ust=1667890379193000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCJizqv69m_sCFQAAAAAdAAAAABAE",
+                image:"https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
+                education:["P.H.D MBBS from AIIMS Delhi","Several Awards in Skin Domain"],
                 des: "Specialized dermatologist for various types of skin diseases.Dermatologists are medical doctors who specialize in skin, hair and nails. Dermatologists also handle cosmetic disorders, like hair loss and scars. Your dermatologist will examine you, order lab tests, make a diagnosis and treat your condition with medication or a procedure",
                 age: 50,
                 expertise: "Heart",
                 fees: 5000,
+                rating:4
               }
             );
             authCtx.onLogin(

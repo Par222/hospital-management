@@ -3,9 +3,7 @@ import { useContext } from "react";
 import { Appointment } from "../context/AppointmentContext";
 const Offline = (props) => {
     const ctx=useContext(Appointment)
-    useEffect(()=>{
-      ctx.updateAppointmentStep2("None","",[])
-    },[])
+    
   return (
     <div className="flex flex-col px-10 py-4 space-y-5 items-center">
       <h1 className="font-display font-extrabold text-2xl  ">Doctor Details</h1>

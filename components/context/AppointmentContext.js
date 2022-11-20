@@ -14,10 +14,12 @@ export const Appointment=createContext(({
 
 const AppointmentContext=(props)=>{
     const [appointment,setAppointment]=useState({})
-    const createAppointment=async()=>{
+    const createAppointment=async(status)=>{
         let app={
             appointment:{
-                ...appointment
+                ...appointment,status:{
+                    doctor:status
+                }
             }
         }
         await axios.post('http://localhost:5000/api/appointments',app).then((result)=>{
