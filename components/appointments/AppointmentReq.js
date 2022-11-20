@@ -36,6 +36,7 @@ const AppRequest = (props) => {
         className={
           "w-[100%] justify-evenly text-xl my-4 py-5 rounded-md text-blackShade-50 bg-tertiarywhite-50 items-center flex shadow-md"
         }
+        key={props.key}
       >
         <div className="w-[15%] text-center">{new Date(props.slot.date).toDateString()}</div>
         <div className="w-[15%] text-center">{props.slot.start_time}</div>

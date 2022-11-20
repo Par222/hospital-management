@@ -83,7 +83,7 @@ const DoctorList = ({ expertise,fees,keyWord,isSearched}) => {
       </div>}
       {!isLoading &&<div className="grid grid-cols-3 w-[80%] my-5 mx-20">
         {filteredArray && filteredArray.length >0 && filteredArray.map((doc) => (
-    <DoctorCard {...doc}></DoctorCard>))}
+    <DoctorCard {...doc} key={doc.id}></DoctorCard>))}
       </div>}
       {!isLoading && filteredArray.length == 0 && (
         <p className="flex justify-center items-center text-lg font-bold w-full mt-20 text-center">

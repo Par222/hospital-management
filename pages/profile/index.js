@@ -341,9 +341,10 @@ const Index = () => {
               <div className="w-[10%] text-center ">Status</div>
             </div>
             {ambReq &&
-              ambReq.map((amb) => (
+              ambReq.map((amb,i) => (
                 <Request
                   {...amb}
+                   key={i}
                   openHandler={openHandler}
                   closeHandler={closeHandler}
                 ></Request>
@@ -366,8 +367,8 @@ const Index = () => {
               <div className="w-[15%] text-center ">Disease Category</div>
             </div>
             {appReq &&
-              appReq.map((app) => (
-                <AppRequest {...app}   openHandler={openAppHandler}
+              appReq.map((app,i) => (
+                <AppRequest {...app}   openHandler={openAppHandler} key={i}
                 closeHandler={closeAppHandler}></AppRequest>
               
               ))}

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import About from "./About";
 const Choose = () => {
-  const [tab1, setTab1] = useState(false);
+  const [tab1, setTab1] = useState(true);
   const [tab2, setTab2] = useState(false);
-  const [tab3, setTab3] = useState(true);
+  const [tab3, setTab3] = useState(false);
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex flex-col w-[100%] items-center">
@@ -28,6 +28,7 @@ const Choose = () => {
             setTab3(false);
           }}
           className={tab1 ? "text-tertiaryblue-50" : "text-blackShade-50"}
+          role="about"
         >
           Certified Doctor
         </span>
@@ -36,7 +37,9 @@ const Choose = () => {
             setTab1(false);
             setTab2(true);
             setTab3(false);
+           
           }}
+          
           className={tab2 ? "text-tertiaryblue-50" : "text-blackShade-50"}
         >
           Success Treatment
@@ -47,6 +50,7 @@ const Choose = () => {
             setTab2(false);
             setTab3(true);
           }}
+          
           className={tab3 ? "text-tertiaryblue-50" : "text-blackShade-50"}
         >
           Mordern Technology

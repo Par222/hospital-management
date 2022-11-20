@@ -4,10 +4,10 @@ const Experts = () => {
     <div className="w-full">
       <div className="flex flex-col w-[100%] items-center">
         <div className="font-Heading text-base text-tertiaryblue-50 font-semibold">
-          Our Doctor's
+          Our Doctor&#39;s
         </div>
         <div className="flex flex-col mt-5 font-display text-5xl font-extrabold space-y-5">
-          <span>Our Expert Doctor's</span>
+          <span>Our Expert Doctor&#39;s</span>
         </div>
         <div className="flex w-[60%] flex-wrap mt-8 font-Heading text-lg text-blackShade-50 text-center">
           <p>

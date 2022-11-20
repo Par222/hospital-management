@@ -9,7 +9,7 @@ function AppointmentDetailsListItem(props) {
   let confirmationStatusDiv = "";
   if (props?.status === "Confirmed") {
     confirmationStatusDiv = (
-      <div className="text-[11px] text-[#9290e9] bg-[#e9f6fe] rounded font-bold w-[19%] text-center p-[6px] m-2">
+      <div className="text-[11px] text-[#9290e9] bg-[#e9f6fe] rounded font-bold w-[19%] text-center p-[6px] m-2" role="confirmed">
         Confirmed
       </div>
     );
@@ -22,6 +22,7 @@ function AppointmentDetailsListItem(props) {
             event.stopPropagation();
             props.onConfirmAppointment(props.id);
           }}
+          role={`app${props.id}`}
         >
           <FontAwesomeIcon icon={faCheckSquare} />
         </button>

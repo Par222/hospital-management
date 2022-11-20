@@ -13,7 +13,7 @@ export const DUMMY_APPOINTMENTS = [
     profilePicture: "",
     startDate: new Date(),
     endDate: new Date(new Date().getTime() + 1000 * 60 * 60 * 10),
-    id: uuidv4(),
+    id:"1",
     additionalNotes: "",
     illness: "Fever",
     illnessDescription: "",

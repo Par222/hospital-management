@@ -1,7 +1,7 @@
 
 
 function MyPatients() {
-  const patientListItems;
+  const patientListItems=[];
   return (
     <div className="w-full space-y-5">
       <h2 className="text-xl font-semibold font-title py-2 border-b-2 border-indigo-500 w-[50%]">

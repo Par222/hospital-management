@@ -15,7 +15,7 @@ const Index = () => {
       <NavBar></NavBar>
       <div className={`h-[700px] flex ${styles.about} bg-opacity-30`}>
         <div className="flex flex-col mt-[8%] ml-[10%] justify-center   ">
-          <div className="font-Heading text-lg text-tertiaryblue-50 font-semibold">
+          <div className="font-Heading text-lg text-tertiaryblue-50 font-semibold" role="heading">
             About Us
           </div>
           <div className="flex flex-col mt-5 font-display text-5xl font-extrabold space-y-5">

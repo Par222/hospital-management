@@ -83,9 +83,7 @@ function AppointmentCalendar(props) {
   // const viewApppointmentHandler = ()
 
   const TimeTableCell = useCallback(
-    React.memo(({ onDoubleClick, ...restProps }) => {
-      // console.log(restProps)
-      // console.log(onDoubleClick)
+    React.memo(function table({ onDoubleClick, ...restProps }) {
       return <WeekView.TimeTableCell {...restProps} onDoubleClick={onDoubleClick} />;
     }),
     []

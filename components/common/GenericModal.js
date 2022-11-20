@@ -1,8 +1,8 @@
 const GenericModal = (props) => {
   return (
-    <>
-      <div className="opacity-80 w-full h-[100vh] overflow-hidden bg-blackShade-50 z-10 absolute top-0 left-0 font-display"></div>
-      <div className="rounded-md bg-tertiarywhite-100 z-50 absolute top-[15%] left-[27.5%] w-[45%] max-h-[70%]  shadow-inner overflow-y-auto">
+    <div role={"modal"}>
+      <div className="opacity-80 w-full h-[100vh] overflow-hidden bg-blackShade-50 z-10 absolute top-0 left-0 font-display" ></div>
+      <div className="rounded-md bg-tertiarywhite-100 z-50 absolute top-[15%] left-[27.5%] w-[45%] max-h-[70%]  shadow-inner overflow-y-auto" >
         <div className="flex flex-col mb-2 rounded-md">
           <div className="flex  w-full justify-between items-baseline bg-tertiaryblue-50 rounded-t-md">
             <h1 className="text-tertiarywhite-100 font-bold text-xl px-4 py-3 ">{props.title}</h1>
@@ -68,7 +68,7 @@ const GenericModal = (props) => {
         </div>
 
       </div>
-    </>
+    </div>
   );
 };
 export default GenericModal;

@@ -47,21 +47,21 @@ const NavBar = (props) => {
         >
           <li onMouseOver={()=>setShowFac(false)}>
             <Link href="/patient" >
-              <a className={router.pathname == "/patient" ? "active" : ""}>
+              <a className={router.pathname == "/patient" ? "active" : ""} role="Navlink">
                 Home
               </a>
             </Link>
           </li>
           <li onMouseOver={()=>setShowFac(false)}>
             <Link href={"/about"}>
-              <a className={router.pathname == "/about" ? "active" : ""}>
+              <a className={router.pathname == "/about" ? "active" : ""}  role="Navlink">
                 About Us
               </a>
             </Link>
           </li>
           <li>
             {" "}
-            <span className="cursor-pointer " id="fac" onMouseOver={()=>setShowFac(true)}>
+            <span className="cursor-pointer " id="fac" onMouseOver={()=>setShowFac(true)}  role="Navlink">
               <p>Facilities </p>
               {showFac && facilities}
             </span>
@@ -70,7 +70,7 @@ const NavBar = (props) => {
           <li onMouseOver={()=>setShowFac(false)}>
             {" "}
             <Link href="/department">
-              <a className={router.pathname == "/department" ? "active" : ""}>
+              <a className={router.pathname == "/department" ? "active" : ""}  role="Navlink">
                 Departments
               </a>
             </Link>
@@ -78,7 +78,7 @@ const NavBar = (props) => {
 
           <li onMouseOver={()=>setShowFac(false)}>
             <Link href="/profile" >
-              <a className={router.pathname == "/profile" ? "active" : ""}>
+              <a className={router.pathname == "/profile" ? "active" : ""}  role="Navlink">
                 Profile
               </a>
             </Link>

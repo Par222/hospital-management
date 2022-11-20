@@ -59,10 +59,10 @@ const Index = (props) => {
       </div>
       <div className="flex flex-col w-[100%] items-center my-4">
         <div className="font-Heading text-base text-tertiaryblue-50 font-semibold">
-          Our Doctor's
+          Our Doctor&#39;s
         </div>
         <div className="flex flex-col mt-5 font-display text-5xl font-extrabold space-y-5">
-          <span>Our Expert Doctor's</span>
+          <span>Our Expert Doctor&#39;s</span>
         </div>
         <div className="flex w-[60%] flex-wrap mt-8 font-Heading text-lg text-blackShade-50 text-center">
           <p>
@@ -96,13 +96,14 @@ const Index = (props) => {
         </form>
         <div className="flex w-full justify-center my-5 bg-tertiarywhite-50 rounded-full px-2 cursor-pointer">
           {categories &&
-            categories.map((cat) => (
+            categories.map((cat, i) => (
               <div
                 className={
                   type == cat
                     ? "font-Heading flex w-[20%] justify-center  py-3 px-2 rounded-full bg-tertiaryblue-50 text-tertiarywhite-50"
                     : "font-Heading flex w-[20%]  py-3 px-2 rounded-full justify-center"
                 }
+                key={i}
                 onClick={() => setType(cat)}
               >
                 {cat}

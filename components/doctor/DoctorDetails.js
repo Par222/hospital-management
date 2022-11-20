@@ -149,7 +149,7 @@ const DoctorDetails = (props) => {
               <h1 className="font-semibold border-l-4 border-l-tertiaryblue-50 text-2xl px-2  text-left text-tertiaryblue-50 my-2 font-Heading">
                 Education
               </h1>
-              {props.education && props.education.map((ed)=><div className="font-display text-base my-2 flex space-x-2 items-center"><span className="bg-tertiaryblue-60 p-2 rounded-full hover:bg-tertiaryblue-50 hover:transition-all"><Education></Education></span><span>{ed}</span></div>)}
+              {props.education && props.education.map((ed,i)=><div className="font-display text-base my-2 flex space-x-2 items-center" key={i}><span className="bg-tertiaryblue-60 p-2 rounded-full hover:bg-tertiaryblue-50 hover:transition-all"><Education></Education></span><span>{ed}</span></div>)}
               </div>}
               <h1 className="font-semibold text-2xl mx-7 px-2 font-Heading text-left text-tertiaryblue-50 my-2 border-l-4 border-l-tertiaryblue-50">
                 Additional Information
@@ -161,6 +161,7 @@ const DoctorDetails = (props) => {
                 <button
                   className="bg-tertiaryViolet text-tertiarywhite-100  text-base rounded-md px-6 py-2"
                   onClick={openHandler}
+                  role="book"
                 >
                   BOOK AN APPOINTMENT
                 </button>
