@@ -6,7 +6,7 @@ function PatientSlug(props){
   const patientSlug = Router.query.patientSlug;
 
   return(
-    <PatientDetails />
+    <PatientDetails patientSlug={patientSlug}/>
   )
 }
 

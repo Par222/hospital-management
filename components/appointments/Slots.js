@@ -14,12 +14,14 @@ const Slots = ({step,props}) => {
     setDate(date)
   }
   useEffect(()=>{
+
      if(date=="")
      ctx.updateAppointmentStep1(mode,time,new Date())
      else
     ctx.updateAppointmentStep1(mode,time,date)
    
     console.log(ctx.appointment)
+    console.log(mode,time,date)
 
   },[mode,time,date])
 
