@@ -62,7 +62,6 @@ function authReducer(state, action) {
 function findRemainingTokenTime(expirationTime) {
   const currentTime = new Date().getTime();
   const adjustedExpirationTime = new Date(expirationTime).getTime();
-  console.log(currentTime, expirationTime);
   const remainingTime = adjustedExpirationTime - currentTime;
   return remainingTime;
 }

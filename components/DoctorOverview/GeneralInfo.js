@@ -4,7 +4,7 @@ import {faVideoCamera, faStethoscope} from "@fortawesome/free-solid-svg-icons"
 function GeneralInfo(props){
     return(
         <div className = "w-[100%]">
-            <div className = "mt-6 mb-3">
+            <div className = "mb-3">
                 <h2 className = "text-xl font-bold mb-1">Welcome, Dr. Param!</h2>
                 <p className = "text-sm text-gray-500">Have a nice day at work!</p>
             </div>

@@ -1,7 +1,7 @@
-// import MyPatients from "../../../components/MyPatients/MyPatients";
+import MyPatients from "../../../components/MyPatients/MyPatients";
 
-// function Index(){
-//   return <MyPatients />
-// }
+function Index(){
+  return <MyPatients />
+}
 
-// export default Index;
+export default Index;

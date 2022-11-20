@@ -9,7 +9,7 @@ function MiddleDiv(props){
             <div className = "w-[27%] flex-grow">
                 <AppointmentsInfo />
             </div>
-            <div className = "w-[40%] flex-grow">
+            <div className = "w-[40%] space-y-4 flex-grow">
                 <PatientsInfo />
                 <PatientGenderChart />
             </div>

@@ -8,6 +8,7 @@ const Form = (props) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [userType, setUserType] = useState("Patient");
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [nameIsValid, setNameIsValid] = useState(false);
   const [passwordIsValid, setPaswordIsValid] = useState(false);
@@ -25,6 +26,11 @@ const Form = (props) => {
   const nameHandler = (event) => {
     setName(event.target.value);
   };
+
+  const userTypeChangeHandler = (event) => {
+    setUserType(event.target.value);
+  };
+
   useEffect(() => {
     if (passwordIsBlur || nameIsBlur || emailIsBlur) {
       if (password.length >= 7) setPaswordIsValid(true);
@@ -36,7 +42,16 @@ const Form = (props) => {
       if (email.length > 0 && email.includes("@")) setEmailIsValid(true);
       else setEmailIsValid(false);
     }
-  }, [name, email, password, nameIsBlur, passwordIsBlur, emailIsBlur]);
+  }, [
+    name,
+    email,
+    password,
+    nameIsBlur,
+    passwordIsBlur,
+    emailIsBlur,
+    userType,
+  ]);
+
   const submitHandler = async (event) => {
     let FormisValid = nameIsValid && emailIsValid && passwordIsValid;
     event.preventDefault();
@@ -59,28 +74,51 @@ const Form = (props) => {
         );
         if (result.ok) {
           const data = await result.json();
-          console.log(data, "auth");
-
-          await axios
-            .post(`http://localhost:5000/api/patient/login`, {
-              token: data.idToken,
-              name: name,
-              email: email,
-              password: password,
-            })
-            .then((details) => {
-              authCtx.onLogin(
-                data.idToken,
-                data.refreshToken,
-                new Date(
-                  new Date().getTime() + parseInt(data.expiresIn) * 1000
-                ).getTime(),
-                details?.data?.user?.id
-              );
-              router.push("/patient");
-            });
-          } 
-          else {
+          console.log("ho")
+          const userData = await axios.get(
+            `http://localhost:5000/api/user-type/${email}`
+          );
+          authCtx.onSetUserType(userData?.data?.userData?.user_type);
+          if (userData?.data?.userData?.user_type === "Doctor") {
+            router.push("/doctor");
+            const doctorData = await axios.post(
+              `http://localhost:5000/api/doctors/login`,
+              {
+                token: data.idToken,
+                name: name,
+                email: email,
+                password: password,
+              }
+            );
+            authCtx.onLogin(
+              data.idToken,
+              data.refreshToken,
+              new Date(
+                new Date().getTime() + parseInt(data.expiresIn) * 1000
+              ).getTime(),
+              doctorData?.data?.doctor?.id
+            );
+          } else {
+            const patientData = await axios.post(
+              `http://localhost:5000/api/patient/login`,
+              {
+                token: data.idToken,
+                name: name,
+                email: email,
+                password: password,
+              }
+            );
+            authCtx.onLogin(
+              data.idToken,
+              data.refreshToken,
+              new Date(
+                new Date().getTime() + parseInt(data.expiresIn) * 1000
+              ).getTime(),
+              patientData?.data?.user?.id
+            );
+            router.push("/patient");
+          }
+        } else {
           toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
           });
@@ -89,6 +127,7 @@ const Form = (props) => {
         console.log(err);
       }
     } else {
+      console.log(userType);
       try {
         const result = await fetch(
           `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
@@ -103,25 +142,64 @@ const Form = (props) => {
         );
         if (result.ok) {
           const data = await result.json();
-          await axios
-            .post(`http://localhost:5000/api/patient/signup`, {
-              token: data.idToken,
-              name: name,
-              email: email,
-              password: password,
-            })
-            .then((details) => {
-              authCtx.onLogin(
-                data.idToken,
-                data.refreshToken,
-                new Date(
-                  new Date().getTime() + parseInt(data.expiresIn) * 1000
-                ).getTime(),
-                details?.data?.user?.id
-              );
-              router.push("/patient");
-              console.log(result);
-            });
+          const user = {
+            username: name,
+            email: email,
+            user_type: userType,
+          };
+
+          if (userType === "Doctor") {
+            const doctorData = await axios.post(
+              `http://localhost:5000/api/doctors/signup`,
+              {
+                token: data.idToken,
+                name: name,
+                email: email,
+                password: password,
+                image:
+                  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fdoctor&psig=AOvVaw36y9wNA8Q2InwDqjWu6G5E&ust=1667890379193000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCJizqv69m_sCFQAAAAAdAAAAABAE",
+                des: "Specialized dermatologist for various types of skin diseases.Dermatologists are medical doctors who specialize in skin, hair and nails. Dermatologists also handle cosmetic disorders, like hair loss and scars. Your dermatologist will examine you, order lab tests, make a diagnosis and treat your condition with medication or a procedure",
+                age: 50,
+                expertise: "Heart",
+                fees: 5000,
+              }
+            );
+            authCtx.onLogin(
+              data.idToken,
+              data.refreshToken,
+              new Date(
+                new Date().getTime() + parseInt(data.expiresIn) * 1000
+              ).getTime(),
+              doctorData?.data?.doctor?.id
+            );
+            user.doctorID = doctorData?.data?.user?.id;
+            router.push("/doctor");
+          } else {
+            const patientData = await axios.post(
+              `http://localhost:5000/api/patient/signup`,
+              {
+                token: data.idToken,
+                name: name,
+                email: email,
+                password: password,
+              }
+            );
+            authCtx.onLogin(
+              data.idToken,
+              data.refreshToken,
+              new Date(
+                new Date().getTime() + parseInt(data.expiresIn) * 1000
+              ).getTime(),
+              patientData?.data?.user?.id
+            );
+            user.patientID = patientData?.data?.user?.id;
+            router.push("/patient");
+          }
+          authCtx.onSetUserType(userType);
+
+          const userData = axios.post("http://localhost:5000/api/user-type", {
+            user: user,
+          });
         } else
           toast.error("Authentication Failed !", {
             position: toast.POSITION.BOTTOM_RIGHT,
@@ -135,6 +213,7 @@ const Form = (props) => {
       setEmail("");
       setPassword("");
       setName("");
+      setUserType("Patient");
       setNameIsBlur(false);
       setEmailIsBlur(false);
       setPaswordIsBlur(false);
@@ -205,6 +284,48 @@ const Form = (props) => {
             <p className="text-red-600 text-sm mb-1 ">
               Minimum 7 characters needed
             </p>
+          )}
+          {!props?.isLogin && (
+            <div className="flex flex-col space-y-2">
+              <div className="flex">
+                <h2 className="text-slate-800 font-semibold">Sign up as:</h2>
+                <span className="mx-1 text-red-600">*</span>
+              </div>
+              <div className="flex space-x-3">
+                <div className="flex space-x-2">
+                  <input
+                    type="radio"
+                    onClick={userTypeChangeHandler}
+                    value="Patient"
+                    id="user_type_patient"
+                    name="user_type"
+                    checked={userType === "Patient"}
+                  />
+                  <label
+                    className="text-slate-800 font-semibold"
+                    htmlFor="user_type_patient"
+                  >
+                    Patient
+                  </label>
+                </div>
+                <div className="flex space-x-2">
+                  <input
+                    type="radio"
+                    value="Doctor"
+                    onClick={userTypeChangeHandler}
+                    id="user_type_doctor"
+                    name="user_type"
+                    checked={userType === "Doctor"}
+                  />
+                  <label
+                    className="text-slate-800 font-semibold"
+                    htmlFor="user_type_doctor"
+                  >
+                    Doctor
+                  </label>
+                </div>
+              </div>
+            </div>
           )}
           <button
             type="submit"

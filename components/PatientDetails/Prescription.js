@@ -26,7 +26,7 @@ function Prescription(props) {
   }
 
   return (
-    <div className="w-full space-y-5">
+    <div className="w-full space-y-5 py-8">
       {!showUploadPrescription && (
         <button
           type="button"
@@ -38,7 +38,8 @@ function Prescription(props) {
       )}
       {showUploadPrescription && (
         <div className="space-y-5">
-          <h2 className="text-xl font-semibold font-title py-2 border-b-2 border-indigo-500 w-[50%]">
+          {/* <h2 className="text-xl font-semibold font-title py-2 border-b-2 border-indigo-500 w-[50%]"> */}
+          <h2 className="text-xl font-semibold font-title">
             Upload Prescription
           </h2>
           <div className="mb-18">

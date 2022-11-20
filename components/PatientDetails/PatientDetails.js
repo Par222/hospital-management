@@ -5,8 +5,8 @@ import Prescription from "./Prescription";
 
 function PatientDetails(props){
   return(
-    <div className="flex space-x-10 mt-8">
-      <div className="flex-grow space-y-8">
+    <div className="flex space-x-10">
+      <div className="flex-grow ">
         <PreviousAppointments />
         <MedicalHistory />
         <Prescription />

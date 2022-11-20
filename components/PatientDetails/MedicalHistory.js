@@ -52,8 +52,9 @@ function MedicalHistory(props) {
     );
   });
   return (
-    <div className="w-full space-y-5">
-      <h2 className="text-xl font-semibold font-title py-2 border-b-2 border-indigo-500 w-[50%]">
+    <div className="w-full space-y-5 border-b-2 border-gray-300 py-8">
+      {/* <h2 className="text-xl font-semibold font-title py-2 border-b-2 border-indigo-500 w-[50%]"> */}
+      <h2 className="text-xl font-semibold font-title ">
         Medical History
       </h2>
       <div className="space-y-3">
