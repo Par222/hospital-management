@@ -26,37 +26,17 @@ import AppointmentsInfoCard from "../DoctorOverview/AppointmentInfoCard";
 
 import AppointmentsContext from "../../store/Doctor/appointments-context";
 import CustomizedAppointmentForm from "./AppointmentForm/CustomizedAppointmentForm";
-import {
-  BasicLayout,
-  TextEditor,
-  Layout,
-} from "./AppointmentForm/CustomizedAppointmentForm";
+import { BasicLayout, TextEditor, Layout } from "./AppointmentForm/CustomizedAppointmentForm";
 
-function getMillisecondsFromHours(timeInHours) {
-  const index = timeInHours.indexOf(":");
-  const hours = +timeInHours.substring(0, index);
-  const minutes = +timeInHours.substring(index + 1);
-  const milliseconds = hours * 3600 * 1000 + minutes * 60 * 1000;
-  return milliseconds;
-}
+const currentDate = "2018-06-27";
 
 function AppointmentCalendar(props) {
   const appointmentsCtx = useContext(AppointmentsContext);
-  const appointments = appointmentsCtx.appointments.map((item) => {
-    const startDate = new Date(item.appointment.slot.date.getTime() + getMillisecondsFromHours(item.appointment.slot.start_time));
-    return {
-      title: item.patientData.name,
-      startDate: startDate,
-      endDate: new Date(startDate.getTime() + 60 * 60 * 1000),
-      id: item.appointment.id
-    }
-  })
 
   const [addedAppointment, setAddedAppointment] = useState({});
-  const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] =
-    useState(false);
+  const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] = useState(false);
   const [showAppointmentForm, setShowAppointmentForm] = useState(false);
-  const [currentView, setCurrentView] = useState("Week");
+  const [currentView, setCurrentView] = useState("Week")
 
   const viewChangeHandler = (event) => {
     setCurrentView(event.target.value);
@@ -68,7 +48,7 @@ function AppointmentCalendar(props) {
 
   const hideAppointmentFormHandler = () => {
     setShowAppointmentForm(false);
-  };
+  }
 
   // const onCommitChanges = useCallback(
   //   ({ added, changed, deleted }) => {
@@ -94,7 +74,7 @@ function AppointmentCalendar(props) {
   //   [setData, setIsAppointmentBeingCreated, data]
   // );
 
-  const onCommitChanges = () => {};
+  const onCommitChanges = () => {}
   const onAddedAppointmentChange = useCallback((appointment) => {
     setAddedAppointment(appointment);
     setIsAppointmentBeingCreated(true);
@@ -103,17 +83,12 @@ function AppointmentCalendar(props) {
   // const viewApppointmentHandler = ()
 
   const TimeTableCell = useCallback(
-    React.memo(({ onDoubleClick, ...restProps }) => {
-      // console.log(restProps)
-      // console.log(onDoubleClick)
-      return (
-        <WeekView.TimeTableCell {...restProps} onDoubleClick={onDoubleClick} />
-      );
     React.memo(function table({ onDoubleClick, ...restProps }) {
       return <WeekView.TimeTableCell {...restProps} onDoubleClick={onDoubleClick} />;
     }),
     []
   );
+
 
   const allowDrag = useCallback(() => true, []);
   const allowResize = useCallback(() => true, []);
@@ -129,6 +104,7 @@ function AppointmentCalendar(props) {
       );
     }
     return <AppointmentForm.CommandButton id={id} {...restProps} />;
+
   }, []);
 
   const viewStateActions = (
@@ -144,7 +120,7 @@ function AppointmentCalendar(props) {
     </select>
   );
 
-  // const cust = <CustomizedAppointmentForm {...data[2]}/>
+  // const cust = <CustomizedAppointmentForm {...data[2]}/> 
 
   return (
     <AppointmentsInfoCard
@@ -152,7 +128,7 @@ function AppointmentCalendar(props) {
       header="Appointments"
       action={viewStateActions}
     >
-      <Scheduler data={appointments} height={600}>
+      <Scheduler data={appointmentsCtx.appointments} height={600}>
         <ViewState currentViewName={currentView} currentDate={new Date()} />
         <EditingState
           onCommitChanges={onCommitChanges}
@@ -182,7 +158,7 @@ function AppointmentCalendar(props) {
 
         <MonthView />
 
-        <Appointments />
+        <Appointments  />
 
         <AppointmentTooltip showOpenButton showDeleteButton={true} />
 
