@@ -43,22 +43,22 @@ const AppRequest = (props) => {
         <div className="w-[15%] text-centre">{props.mode}</div>
         <div
           className={
-            props.status == "Pending"
+            props.status.doctor == "Pending"
               ? "rounded-md w-[10%] text-center bg-tertiaryViolet text-tertiarywhite-100 py-2"
               : " rounded-md w-[10%] text-center bg-tertiaryblue-50 text-tertiarywhite-100 py-2 cursor-pointer"
           }
           onClick={() => {
-            if (props.status == "Pending") return;
+            if (props.status.doctor == "Pending") return;
             setShowModal(true);
             props.openHandler();
             setRequestId(props.id);
           }}
         >
-          {props.status}
+          {props.status.doctor}
         </div>
         <div className="w-[13%] text-centre">{props.illness}</div>
       </div>
-      {showModal && props.status == "Approved" && add && (
+      {showModal && props.status.doctor == "Approved" && add && (
         <GenericModal
           title="Appointment Details"
           posText="Done"

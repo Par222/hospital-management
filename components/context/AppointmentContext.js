@@ -17,7 +17,9 @@ const AppointmentContext=(props)=>{
     const createAppointment=async(status)=>{
         let app={
             appointment:{
-                ...appointment,status
+                ...appointment,status:{
+                    doctor:status
+                }
             }
         }
         await axios.post('http://localhost:5000/api/appointments',app).then((result)=>{
