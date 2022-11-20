@@ -60,7 +60,7 @@ function AppointmentsToday(props) {
     console.log(appointmentsData)
     const currentDate = new Date();
     const requiredAppointments = appointmentsData?.data?.appointments?.filter((item) => {
-      return item.appointment.slot.date === currentDate;
+      return item?.appointment?.slot?.date === currentDate;
     });
     setAppointmentsToday(requiredAppointments);
   }, [authCtx.id]);

@@ -15,6 +15,7 @@ export default AppointmentsContext;
 
 function appointmentsReducer(state, action) {
   if (action.type === "SET_APPOINTMENTS") {
+    console.log(action.value)
     return action.value;
   }
   if (action.type === "ADD_APPOINTMENT") {
