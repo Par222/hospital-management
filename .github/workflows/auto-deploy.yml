@@ -16,6 +16,6 @@ jobs:
         with:
           node-version: '16'
       - name: Install necessary packages
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Build the project
         run: npm run build
