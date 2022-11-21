@@ -19,7 +19,7 @@ const Index = () => {
                 className="text-3xl font-bold mb-5 text-slate-800"
                 id={styles.title}
               >
-                Hospital
+                Medicare
               </h1>
 
               <svg
