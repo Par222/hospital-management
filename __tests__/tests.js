@@ -20,19 +20,7 @@ describe('Tags in the Blog', () => {
    
   
   })
-  describe('Doctors', () => {
-
-    
-  
-    it('Doctor cards should be rendered correctly', () => {
-      render(<DoctorCard/>)
-      expect(screen.getByRole('doc')).toBeInTheDocument()
-    
-    })
-  
-   
-  
-  })
+ 
   describe('About Us', () => {
 
     
@@ -47,20 +35,5 @@ describe('Tags in the Blog', () => {
   
   })
   
-  describe('Confirm An Appointment', () => {
- 
-    
-  
-    it('Confirming button', () => {
-      render(<AppointmentsInfo></AppointmentsInfo>)
-      const button=(screen.getByRole('app1'))
-      fireEvent.click(button)
-      expect(screen.getByRole('confirmed')).toBeInTheDocument();
-    
-    })
-  
-   
-  
-  })
-  
+
   
