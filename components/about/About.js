@@ -2,7 +2,18 @@ import Check from "../common/icons/Check";
 import Information from "./Information";
 import Doctor from "../common/icons/Doctor";
 import Medic from "../common/icons/Medic";
+import { useState,useEffect } from "react";
+import axios from "axios";
 const About = (props) => {
+  const [abtText,setAbtText]=useState("")
+  const fetchAbtData=async()=>{
+    const result =await axios.get('http://localhost:5000/api/scrape/about?url=https://www.criticareasiahospital.com/about-us/')
+    setAbtText(result.data.about)
+  }
+  useEffect(()=>{
+
+   fetchAbtData()
+  },[])
   return (
     <div className="w-full flex">
       <div className="flex flex-col w-[50%]">
@@ -15,9 +26,7 @@ const About = (props) => {
         </div>
         <div className="flex w-[100%] flex-wrap mt-8 font-Heading text-lg text-blackShade-50">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco
+           {abtText.substring(0,500)}
           </p>
         </div>
         <ul className="list-none font-Heading text-blackShade-50 text-base mt-5 flex flex-col  space-y-4 font-bold">
