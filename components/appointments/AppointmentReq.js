@@ -15,7 +15,7 @@ const AppRequest = (props) => {
 
   const fetchAppointmentdetails = async () => {
     axios
-      .get(`https://hm-project-finalbackend.herokuapp.com/api/appointments/${requestId}`)
+      .get(`http://localhost:5000/api/appointments/${requestId}`)
       .then((result) => {
         setApp(result.data.appointment);
       });

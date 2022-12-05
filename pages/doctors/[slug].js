@@ -17,7 +17,7 @@ const Slug = () => {
   const fetchDoctors = async () => {
     let result;
 
-    result = await axios.get(`https://hm-project-finalbackend.herokuapp.com/api/doctors/${id}`);
+    result = await axios.get(`http://localhost:5000/api/doctors/${id}`);
     console.log(result.data);
     setDoctor(result.data.doctor);
   };
@@ -31,7 +31,7 @@ const Slug = () => {
   return (
     <>
       <NavBar></NavBar>
-      <div className={`h-[600px] flex ${styles.docDetails}`}>
+      {/* <div className={`h-[600px] flex ${styles.docDetails}`}>
         <div className="flex flex-col mt-[15%] ml-[10%] justify-center  ">
           <div className="font-Heading text-lg text-tertiaryblue-50 my-4 font-semibold">
             Doctor Details
@@ -50,7 +50,7 @@ const Slug = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
       {isLoading && (
         <div className="flex justify-center w-full h-full">
           <ClassicSpinner size="30" color="#165FCC"></ClassicSpinner>

@@ -52,7 +52,7 @@ const Index = () => {
   const fetchProfile = async () => {
     try {
       const result = await axios.get(
-        `https://hm-project-finalbackend.herokuapp.com/api/patient/${ctx.id}`
+        `http://localhost:5000/api/patient/${ctx.id}`
       );
       setProfileDetails(result.data.user);
       console.log(result.data.user);
@@ -66,7 +66,7 @@ const Index = () => {
   const fetchAmbulance = async () => {
     try {
       const result = await axios.get(
-        `https://hm-project-finalbackend.herokuapp.com/api/request/${ctx.id}`
+        `http://localhost:5000/api/request/${ctx.id}`
       );
       setAmbReq(result.data.requests);
     } catch (err) {
@@ -76,7 +76,7 @@ const Index = () => {
   const fetchAppointments = async () => {
     try {
       const result = await axios.get(
-        `https://hm-project-finalbackend.herokuapp.com/api/appointments/patient-appointment-list/${ctx.id}`
+        `http://localhost:5000/api/appointments/patient-appointment-list/${ctx.id}`
       );
       setAppReq(result.data.appointments);
     } catch (err) {
@@ -96,7 +96,7 @@ const Index = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const result = await axios
-      .patch(`https://hm-project-finalbackend.herokuapp.com/api/patient/${ctx.id}`, {
+      .patch(`http://localhost:5000/api/patient/${ctx.id}`, {
         name: name,
         contact: contact,
         image: image,
@@ -145,7 +145,7 @@ const Index = () => {
   return (
     <>
       <NavBar></NavBar>
-      <div className={`h-[600px] flex ${styles.profile} bg-opacity-30`}>
+      {/* <div className={`h-[600px] flex ${styles.profile} bg-opacity-30`}>
         <div className="flex flex-col mt-[0%] ml-[10%] justify-center   ">
           <div className="font-Heading text-lg text-tertiaryblue-50 font-semibold">
             Profile
@@ -160,7 +160,7 @@ const Index = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
       <div
         className={
           showModal ? "h-[0vh] overflow-hidden" : "flex items-center flex-col"
@@ -242,7 +242,7 @@ const Index = () => {
             ></img>
             <div className="w-[80%] flex justify-between items-center text-lg mt-5">
               <span className="text-tertiaryblue-50">Patient Name :</span>
-              <span>{profileDetails?.name}</span>
+              <span id='name'>{profileDetails?.name}</span>
             </div>
             <div className="w-[80%] flex justify-between items-center text-lg mt-5">
               <span className="text-tertiaryblue-50">Email :</span>

@@ -22,7 +22,7 @@ const LoginForm = (props) => {
     <div className="rounded-md shadow-lg bg-white w-[70%] ">
       <div className="flex justify-around mt-2 bg-slate-100 rounded-t-md ">
         <span className={!isLogin?`py-3 font-bold cursor-pointer ${styles.active}`:`py-3 font-bold cursor-pointer`} onClick={()=>{setisLogin(false)}} >Sign-Up</span>
-        <span className={isLogin?`py-3 font-bold cursor-pointer ${styles.active}`:`py-3 font-bold cursor-pointer`} onClick={()=>setisLogin(true)}>Sign-In</span>
+        <span className={isLogin?`py-3 font-bold cursor-pointer ${styles.active}`:`py-3 font-bold cursor-pointer`} id="sign in" onClick={()=>setisLogin(true)}>Sign-In</span>
       </div>
      <div className="px-5 py-2 rounded-t-2xl">
         <Form isLogin={isLogin}></Form>

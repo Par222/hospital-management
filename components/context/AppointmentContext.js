@@ -20,8 +20,8 @@ const AppointmentContext=(props)=>{
                 ...appointment
             }
         }
-        await axios.post('https://hm-project-finalbackend.herokuapp.com/api/appointments',app).then((result)=>{
-         axios.patch(`https://hm-project-finalbackend.herokuapp.com/api/doctors/${result.data.appointment.doctor}`,{appointments:result.data.appointment.id}).then(()=>{
+        await axios.post('http://localhost:5000/api/appointments',app).then((result)=>{
+         axios.patch(`http://localhost:5000/api/doctors/${result.data.appointment.doctor}`,{appointments:result.data.appointment.id}).then(()=>{
             toast.success("Request Successful !", {
                 position: toast.POSITION.BOTTOM_RIGHT,
               });})

@@ -140,7 +140,7 @@ const DoctorDetails = (props) => {
               </div>
             </div>
             <div className="flex flex-col w-[70%] justify-start">
-              <h1 className="font-bold text-3xl px-7 text-left text-navyblue-900 mt-10">
+              <h1 className="font-bold text-3xl px-7 text-left text-navyblue-900 mt-10" id='docname'>
                 {props.name}
               </h1>
               <p className="text-left text-xl my-3 px-7 text-tertiaryblue-50 font-base font-Heading">{`Specialization in ${props.expertise} problems`}</p>

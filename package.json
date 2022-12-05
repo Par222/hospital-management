@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "tests": "mocha"
   },
   "dependencies": {
     "@devexpress/dx-react-core": "^3.0.5",
@@ -44,6 +45,7 @@
     "react-quill": "^2.0.0",
     "react-spinners-kit": "^1.9.1",
     "react-toastify": "^9.0.8",
+    "selenium-webdriver": "^4.7.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
