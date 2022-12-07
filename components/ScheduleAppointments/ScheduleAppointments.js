@@ -1,5 +1,5 @@
 import AppointmentCalendar from "./AppointmentCalendar";
-import AppointmentsInfo from "./AppointmentsInfo"
+import AppointmentsInfo from "../DoctorOverview/ApppointmentsInfo"
 
 function ScheduleAppointments(props){
     return (

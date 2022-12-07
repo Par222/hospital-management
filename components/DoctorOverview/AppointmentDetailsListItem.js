@@ -47,16 +47,17 @@ function AppointmentDetailsListItem(props) {
 
   return (
     <li
-      className="flex items-center p-2 py-1 hover:bg-gray-500 hover:text-white cursor-pointer"
       onClick={props.onAppointmentClick}
+      className="hover:bg-indigo-100 flex items-center py-3 px-4 space-x-4"
     >
       <ProfilePicture
         profilePicture={props?.profilePicture}
-        className="w-[45px] h-[45px] m-2"
+        className="w-[50px] h-[50px]"
       />
-      <div className="m-2 mr-6 flex-grow">
+      <div className="flex-grow">
         <p className="text-[13px] font-semibold">{props.name}</p>
-        <p className="text-[13px] text-gray-400">{`${props.gender || "Male"}, ${props.date}, ${props.time}`}</p>
+        <p className="text-[13px] text-gray-400">{`${props.gender || "Male"}, ${props.age || 30}`}</p>
+        <p className="text-[13px] text-gray-400">{`${props.date}, ${props.time}`}</p>
       </div>
       {confirmationStatusDiv}
     </li>

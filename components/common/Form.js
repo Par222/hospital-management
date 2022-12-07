@@ -74,7 +74,6 @@ const Form = (props) => {
         );
         if (result.ok) {
           const data = await result.json();
-          console.log("ho")
           const userData = await axios.get(
             `http://localhost:5000/api/user-type/${email}`
           );

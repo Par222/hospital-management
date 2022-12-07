@@ -8,23 +8,23 @@ const AuthContext = React.createContext({
   userType: null,
   isTokenExpired: false,
   onSetUserType: (userType) => {},
-  onLogin: (token, tokenExpirationTime,id) => {},
+  onLogin: (token, tokenExpirationTime, id) => {},
   onLogout: () => {},
-  id:""
+  id: "",
 });
 
 const defaultAuthState = {
   token: "",
   isTokenExpired: false,
   userType: null,
-  id:""
+  id: "",
 };
 
 function authReducer(state, action) {
   if (action.type === "USER_LOGIN") {
     return {
       token: action.value.token,
-      id:action.value.id,
+      id: action.value.id,
       userType: state.userType,
       isTokenExpired: false,
     };
@@ -35,7 +35,7 @@ function authReducer(state, action) {
   if (action.type === "USER_TYPE") {
     return {
       token: state.token,
-      id:state.id,
+      id: state.id,
       userType: action.value,
       isTokenExpired: false,
     };
@@ -43,7 +43,7 @@ function authReducer(state, action) {
   if (action.type === "USER_RELOAD") {
     return {
       token: action.value.token,
-      id:action.value.id,
+      id: action.value.id,
       userType: action.value.userType,
       isTokenExpired: false,
     };
@@ -53,7 +53,7 @@ function authReducer(state, action) {
       token: "",
       userType: null,
       isTokenExpired: true,
-      id:""
+      id: "",
     };
   }
   return defaultAuthState;
@@ -76,8 +76,8 @@ export function AuthContextProvider(props) {
   const isLoggedIn = !!authState.token;
   const Router = useRouter();
 
-  const loginHandler = (token, refreshToken, tokenExpirationTime,id) => {
-    authDispatchFunction({ type: "USER_LOGIN", value:{token,id}});
+  const loginHandler = (token, refreshToken, tokenExpirationTime, id) => {
+    authDispatchFunction({ type: "USER_LOGIN", value: { token, id } });
     localStorage.setItem("token", token);
     localStorage.setItem("id", id);
     localStorage.setItem("refreshToken", refreshToken);
@@ -89,13 +89,13 @@ export function AuthContextProvider(props) {
   };
 
   const logoutHandler = useCallback(() => {
-    console.log("from logout");
     authDispatchFunction({ type: "USER_LOGOUT" });
     localStorage.removeItem("token");
-    localStorage.removeItem("token")
     localStorage.removeItem("userType");
     localStorage.removeItem("tokenExpirationTime");
     localStorage.removeItem("eventType");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("id");
     logoutTimer && clearTimeout(logoutTimer);
     Router.push("/login");
   }, [Router]);
@@ -105,15 +105,18 @@ export function AuthContextProvider(props) {
     localStorage.setItem("userType", userType);
   };
 
-  const userReloadHandler = useCallback((token, userType, tokenExpirationTime,id) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("tokenExpirationTime", tokenExpirationTime);
-    authDispatchFunction({
-      type: "USER_RELOAD",
-      value: { token: token, userType: userType,id:id },
-    });
-    console.log("reload");
-  }, []);
+  const userReloadHandler = useCallback(
+    (token, userType, tokenExpirationTime, id) => {
+      localStorage.setItem("token", token);
+      localStorage.setItem("tokenExpirationTime", tokenExpirationTime);
+      authDispatchFunction({
+        type: "USER_RELOAD",
+        value: { token: token, userType: userType, id: id },
+      });
+      console.log("reload");
+    },
+    []
+  );
 
   const tokenExpiryHandler = useCallback(() => {
     authDispatchFunction({ type: "TOKEN_EXPIRY" });
@@ -122,6 +125,8 @@ export function AuthContextProvider(props) {
     localStorage.removeItem("userType");
     localStorage.removeItem("tokenExpirationTime");
     localStorage.removeItem("eventType");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("id");
     logoutTimer && clearTimeout(logoutTimer);
     Router.push("/login");
     toast.error("Session Timed Out !", {
@@ -154,7 +159,7 @@ export function AuthContextProvider(props) {
           ).getTime()
         );
         const userType = localStorage.getItem("userType");
-        userReloadHandler(newToken, userType, remainingTokenTime,id);
+        userReloadHandler(newToken, userType, remainingTokenTime, id);
         logoutTimer = setTimeout(tokenExpiryHandler, remainingTokenTime);
       }
     } catch (err) {
@@ -164,7 +169,7 @@ export function AuthContextProvider(props) {
 
   const authCtx = {
     token: authState.token,
-    id:authState.id,
+    id: authState.id,
     isLoggedIn: isLoggedIn,
     userType: authState.userType,
     isTokenExpired: false,
