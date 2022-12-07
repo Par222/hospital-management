@@ -15,7 +15,6 @@ export default AppointmentsContext;
 
 function appointmentsReducer(state, action) {
   if (action.type === "SET_APPOINTMENTS") {
-    console.log(action.value)
     return action.value;
   }
   if (action.type === "ADD_APPOINTMENT") {
@@ -28,13 +27,14 @@ function appointmentsReducer(state, action) {
     });
     return newAppointments;
   }
-  if (action.type === "EDIT APPOINTMENT") {
+  if (action.type === "EDIT_APPOINTMENT") {
+    console.log(action.value);
     const appointmentIndex = state.findIndex((appointment) => {
-      return appointment.id === action.value.appointment.id;
+      return appointment.appointment.id === action.value.appointment.id;
     });
     const newAppointments = [...state];
     const newAppointment = { ...action.value.appointment };
-    newAppointments[appointmentIndex] = newAppointment;
+    newAppointments[appointmentIndex].appointment = newAppointment;
     return newAppointments;
   }
   return defaultAppointmentsState;
@@ -79,17 +79,22 @@ export function AppointmentContextProvider(props) {
   };
 
   const editAppointmentHandler = async (appointment) => {
-    const editedAppointment = await axios.patch(`http://localhost:5000/api/appointments/${appointment.id}`, {
-      appointment: appointment,
-    });
+    const editedAppointment = await axios.patch(
+      `http://localhost:5000/api/appointments/${appointment.id}`,
+      {
+        appointment: appointment,
+      }
+    );
     appointmentsDispatchFunction({
       type: "EDIT_APPOINTMENT",
-      value: editedAppointment?.result?.data?.appointment,
+      value: editedAppointment?.data,
     });
   };
 
+  
+
   // const confirmAppointmentHandler = async (appointmentToBeConfirmed) => {
-    
+
   //   appointmentsDispatchFunction({
   //     type: "EDIT_APPOINTMENT",
   //     value: appointment,
@@ -105,7 +110,7 @@ export function AppointmentContextProvider(props) {
 
   useEffect(() => {
     fetchAppointmentsHandler();
-  }, []);
+  }, [authCtx?.id]);
 
   return (
     <AppointmentsContext.Provider value={appointmentsCtx}>

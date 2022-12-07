@@ -41,6 +41,37 @@ function AppointmentCalendar(props) {
   const [showAppointmentForm, setShowAppointmentForm] = useState(false);
   const [currentView, setCurrentView] = useState("Week");
 
+  const appointmentsToBeDisplayed = appointmentsCtx?.appointments.filter(
+    (appointment) => {
+      return appointment?.appointment?.status === "Confirmed";
+    }
+  );
+
+  const calendarAppointments = appointmentsToBeDisplayed.map((appointment) => {
+    const temp = { ...appointment?.appointment };
+    const index = temp?.slot?.start_time.indexOf(".");
+    let timeHours;
+    if (index != -1) {
+      timeHours = temp?.slot?.start_time.substring(0, index);
+    } else {
+      timeHours = temp?.slot?.start_time.substring(0);
+    }
+    let timeMinutes;
+    if (index != -1) {
+      timeMinutes = temp?.slot?.start_time.substring(index + 1);
+    }
+    const startDate = new Date(
+      new Date(temp?.slot?.date).setHours(timeHours, timeMinutes && timeMinutes || 0)
+    );
+
+    const endDate = new Date(startDate.getTime() + 1000 * 60 * 60);
+
+    temp.startDate = startDate;
+    temp.endDate = endDate;
+    temp.title = `${appointment?.patientData?.name} - ${appointment?.appointment?.description?.text}`;
+    return temp;
+  });
+
   const viewChangeHandler = (event) => {
     setCurrentView(event.target.value);
   };
@@ -134,7 +165,7 @@ function AppointmentCalendar(props) {
       header="Appointments"
       action={viewStateActions}
     >
-      <Scheduler data={appointmentsCtx.appointments} height={600}>
+      <Scheduler data={calendarAppointments} height={600}>
         <ViewState currentViewName={currentView} currentDate={new Date()} />
         <EditingState
           onCommitChanges={onCommitChanges}
@@ -166,9 +197,10 @@ function AppointmentCalendar(props) {
 
         <Appointments />
 
-        <AppointmentTooltip 
-        // showOpenButton 
-        showDeleteButton={true} />
+        <AppointmentTooltip
+          // showOpenButton
+          showDeleteButton={true}
+        />
 
         {/* <AppointmentForm
           // basicLayoutComponent={BasicLayout}

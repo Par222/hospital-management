@@ -182,7 +182,6 @@ import { v4 as uuidv4 } from "uuid";
 function AppointmentsInfo(props) {
   const Router = useRouter();
   const appointmentsCtx = useContext(AppointmentsContext);
-
   // const [appointments, setAppointments] = useState(DUMMY_APPOINTMENTS);
   const [isModalVisible, setIsModalVisible] = useState(true);
   // const [modalDetails, setModalDetails] = useState(null);
@@ -244,38 +243,32 @@ function AppointmentsInfo(props) {
     setIsModalVisible(true);
   };
 
-  const appointmentDetails = appointmentsCtx.appointments
-    ?.filter((item) => {
-      return item?.appointment?.status === "Pending";
-    })
-    console.log(appointmentDetails)
+  const appointmentDetails = appointmentsCtx.appointments?.filter((item) => {
+    return item?.appointment?.status === "Pending";
+  });
   const pendingAppointments = appointmentDetails.map((appointment) => {
-      console.log(appointment)
-      const onButtonClick = {
-        onConfirmAppointment: appointmentConfirmationHandler.bind(
-          this,
-          appointment.id
-        ),
-        onDeclineAppointment: appointmentDeclinationHandler.bind(
-          this,
-          appointment.id
-        ),
-      };
-      return (
-        <AppointmentDetailsListItem
-          key={appointment?.appointment?.id}
-          id={appointment?.appointment?.id}
-          name={appointment?.patientData?.name}
-          profilePicture={appointment?.patientData?.image}
-          date={appointment?.appointment?.slot?.date}
-          time={appointment?.appointment?.slot.start_time}
-          status={appointment?.appointment?.status}
-          gender={appointment?.patientData?.gender}
-          {...onButtonClick}
-          onAppointmentClick={viewAppointmentDetailsHandler}
-        />
-      );
-    });
+    const onButtonClick = {
+      onConfirmAppointment: appointmentConfirmationHandler,
+      onDeclineAppointment: appointmentDeclinationHandler,
+    };
+    const date = new Date(appointment?.appointment?.slot?.date).toDateString();
+    const dateString = `${date.substring(0, 3)}, ${date.substring(4, 7)} ${date.substring(8, 10)}`
+
+    return (
+      <AppointmentDetailsListItem
+        key={appointment?.appointment?.id}
+        id={appointment?.appointment?.id}
+        name={appointment?.patientData?.name}
+        profilePicture={appointment?.patientData?.image}
+        date={dateString}
+        time={appointment?.appointment?.slot.start_time}
+        status={appointment?.appointment?.status}
+        gender={appointment?.patientData?.gender}
+        {...onButtonClick}
+        onAppointmentClick={viewAppointmentDetailsHandler}
+      />
+    );
+  });
 
   const viewAllAppointmentsHandler = () => {
     Router.push("/doctor/appointments");
@@ -303,7 +296,7 @@ function AppointmentsInfo(props) {
                 />
             </GenericModal> */}
       <AppointmentInfoCard
-        className="h-[500px] py-4 overflow-y-auto "
+        className="h-[583px] overflow-y-auto "
         header="Appointment Requests"
         action={
           <button
@@ -314,9 +307,7 @@ function AppointmentsInfo(props) {
           </button>
         }
       >
-        <ul className="w-[100%] flex flex-col">
-          {pendingAppointments}
-        </ul>
+        <ul className="w-[100%] flex flex-col">{pendingAppointments}</ul>
       </AppointmentInfoCard>
     </>
   );

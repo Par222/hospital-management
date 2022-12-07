@@ -3,6 +3,7 @@ import AppointmentInfoCard from "./AppointmentInfoCard";
 import { useContext, useEffect, useState, useCallback } from "react";
 import AuthContext from "../../store/auth-context";
 import axios from "axios";
+import AppointmentsContext from "../../store/Doctor/appointments-context";
 
 const DUMMY_APPOINTMENTS = [
   {
@@ -52,16 +53,18 @@ const DUMMY_APPOINTMENTS = [
 function AppointmentsToday(props) {
   const [appointmentsToday, setAppointmentsToday] = useState([]);
   const authCtx = useContext(AuthContext);
+  const appointmentsCtx = useContext(AppointmentsContext);
 
   const fetchUpcomingAppointmentsHandler = useCallback(async () => {
     const appointmentsData = await axios.get(
       `http://localhost:5000/api/appointments/doctor-upcoming-appointment-list/${authCtx.id}`
     );
-    console.log(appointmentsData)
     const currentDate = new Date();
     const requiredAppointments = appointmentsData?.data?.appointments?.filter((item) => {
-      return item?.appointment?.slot?.date === currentDate;
+      const appointmentDate = new Date(item?.appointment?.slot?.date); 
+      return appointmentDate.getDate() === currentDate.getDate() && appointmentDate.getMonth() === currentDate.getMonth() && item?.appointment?.status === "Confirmed";
     });
+    console.log(requiredAppointments)
     setAppointmentsToday(requiredAppointments);
   }, [authCtx.id]);
 
@@ -81,11 +84,11 @@ function AppointmentsToday(props) {
 
   useEffect(() => {
     fetchUpcomingAppointmentsHandler();
-  }, []);
+  }, [appointmentsCtx?.appointments]);
 
   return (
-    <AppointmentInfoCard className="h-[500px]" header="Appointments Today">
-      <ul className="w-[100%] flex flex-col justify-center">{appointments}</ul>
+    <AppointmentInfoCard className="h-[583px]" header="Appointments Today">
+      <ul className="w-[100%] flex flex-col justify-start">{appointments}</ul>
     </AppointmentInfoCard>
   );
 }
