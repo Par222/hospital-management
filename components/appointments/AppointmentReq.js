@@ -15,7 +15,7 @@ const AppRequest = (props) => {
 
   const fetchAppointmentdetails = async () => {
     axios
-      .get(`https://hm-project-finalbackend.herokuapp.com/api/appointments/${requestId}`)
+      .get(`http://localhost:5000/api/appointments/${requestId}`)
       .then((result) => {
         setApp(result.data.appointment);
       });
@@ -25,7 +25,7 @@ const AppRequest = (props) => {
     if (showModal) {
       setIsLoading(true);
       fetchAppointmentdetails().then(() => {
-        //fetchLocation(result.data.ambulance.location.lat,result.data.ambulance.location.lng)
+     
         setIsLoading(false);
       });
     }
@@ -40,7 +40,7 @@ const AppRequest = (props) => {
       >
         <div className="w-[15%] text-center">{new Date(props.slot.date).toDateString()}</div>
         <div className="w-[15%] text-center">{props.slot.start_time}</div>
-        <div className="w-[15%] text-centre">{props.mode}</div>
+        <div className="w-[15%] text-center">{props.mode}</div>
         <div
           className={
             props.status == "Pending"
@@ -56,7 +56,7 @@ const AppRequest = (props) => {
         >
           {props.status}
         </div>
-        <div className="w-[13%] text-centre">{props.illness}</div>
+        <div className="w-[13%] text-center">{props.illness}</div>
       </div>
       {showModal && props.status == "Approved" && add && (
         <GenericModal

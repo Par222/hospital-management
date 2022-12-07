@@ -17,7 +17,7 @@ const Slug = () => {
   const fetchDoctors = async () => {
     let result;
 
-    result = await axios.get(`https://hm-project-finalbackend.herokuapp.com/api/doctors/${id}`);
+    result = await axios.get(`http://localhost:5000/api/doctors/${id}`);
     console.log(result.data);
     setDoctor(result.data.doctor);
   };

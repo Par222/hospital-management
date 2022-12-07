@@ -10,7 +10,7 @@ const DoctorList = ({ expertise,fees,keyWord,isSearched}) => {
   const fetchDoctors=async()=>{
     let result;
     
-    result=await axios.get(`https://hm-project-finalbackend.herokuapp.com/api/doctors`)
+    result=await axios.get(`http://localhost:5000/api/doctors`)
     console.log(result.data)
     setDocArray(result.data.doctors)
     setFilteredArray(result.data.doctors)
@@ -20,7 +20,7 @@ const DoctorList = ({ expertise,fees,keyWord,isSearched}) => {
   const fetchSearchDoctors=async()=>{
     let result;
     
-    result=await axios.get(`https://hm-project-finalbackend.herokuapp.com/api/doctors/search/${keyWord}`)
+    result=await axios.get(`http://localhost:5000/api/doctors/search/${keyWord}`)
     console.log(result.data)
     setFilteredArray(result.data.doctors)
   

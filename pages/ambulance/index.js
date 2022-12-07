@@ -28,7 +28,7 @@ const Index = () => {
   console.log(ctx.id,"amb")
   const requestHandler = async () => {
     try {
-     const result= await axios.post("https://hm-project-finalbackend.herokuapp.com/api/request", {
+     const result= await axios.post("http://localhost:5000/api/request", {
         status: "Pending",
         patient:ctx.id,
       

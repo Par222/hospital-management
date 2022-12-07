@@ -14,7 +14,7 @@ const Request = (props) => {
   };
 
   const [add, setAdd] = useState("");
-  const fetchLocation = async (lat, lng) => {
+  /*const fetchLocation = async (lat, lng) => {
     await axios
       .get(
         `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=737ada17b7d84106b103048258edb583`
@@ -22,15 +22,11 @@ const Request = (props) => {
       .then((res) => {
         setAdd(res.data);
       });
-  };
+  };*/
   const fetchAmbulancedetails = async () => {
     axios
-      .get(`https://hm-project-finalbackend.herokuapp.com/api/ambulance/${requestId}`)
+      .get(`http://localhost:5000/api/ambulance/${requestId}`)
       .then((result) => {
-        fetchLocation(
-          parseFloat(props.ambulance.location.lat),
-          parseFloat(props.ambulance.location.lng)
-        );
         setAmb(result.data.ambulance);
         console.log(result.data.ambulance);
       });
@@ -77,7 +73,7 @@ const Request = (props) => {
           {props.status}
         </div>
       </div>
-      {showModal && props.status == "Approved" && add && (
+      {showModal && props.status == "Approved"  && (
         <GenericModal
           title="Ambulance Details"
           posText="Done"
@@ -93,7 +89,7 @@ const Request = (props) => {
             <div className="flex space-x-12 items-center">
               <img
                 src={amb.driver?.image}
-                className="rounded-full w-40 h-40"
+                className="rounded-md w-40 h-40"
               ></img>
               <div className="flex flex-col space-y-4 text-lg font-display font-semibold">
                 <div>
@@ -112,7 +108,7 @@ const Request = (props) => {
                   <span className="mr-3 text-tertiaryblue-50 font-Heading">
                     Location Provided:
                   </span>
-                  {add?.features[0]?.properties.formatted}
+                  {amb?.address}
                 </div>
               </div>
             </div>

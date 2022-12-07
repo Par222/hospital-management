@@ -82,7 +82,7 @@ const Slots = ({step,props}) => {
       }
        {
         step==3 && <div className="font-Heading text-lg text-tertiaryred-50 w-full text-center font-semibold">
-          Book Now & Kindly Proceed to payment
+          Book Now & Kindly Proceed to Profile to check Appointment status
         </div>
       }
      
