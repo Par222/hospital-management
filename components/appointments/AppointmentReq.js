@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import GenericModal from "../common/GenericModal";
+import {Markup} from "interweave"
 
 const AppRequest = (props) => {
   const [showModal, setShowModal] = useState(false);
@@ -15,9 +16,9 @@ const AppRequest = (props) => {
 
   const fetchAppointmentdetails = async () => {
     axios
-      .get(`http://localhost:5000/api/appointments/${requestId}`)
+      .get(`http://localhost:5000/api/doctors/${props.id}`)
       .then((result) => {
-        setApp(result.data.appointment);
+        setApp(result.data.doctor);
       });
   };
 
@@ -58,7 +59,7 @@ const AppRequest = (props) => {
         </div>
         <div className="w-[13%] text-center">{props.illness}</div>
       </div>
-      {showModal && props.status == "Approved" && add && (
+      {showModal && props.status == "Confirmed"  && app &&(
         <GenericModal
           title="Appointment Details"
           posText="Done"
@@ -71,6 +72,42 @@ const AppRequest = (props) => {
             <h1 className="font-display font-extrabold text-2xl ">
               Appointment Details
             </h1>
+            <div className="flex space-x-12 items-center">
+        <img src={app.image} className="rounded-md w-48 h-56"></img>
+        <div className="flex flex-col space-y-4 text-lg font-display font-semibold">
+          <div >
+            <span className="mr-3 text-tertiaryblue-50 font-Heading">
+              Name:
+            </span>
+            {app?.name}
+          </div>
+          <div>
+            <span className="mr-3 text-tertiaryblue-50 font-Heading">
+              Mode:
+            </span>
+            {props.mode}
+          </div>
+          <div>
+            <span className="mr-3 text-tertiaryblue-50 font-Heading">
+              Meet Code:
+            </span>
+            {props?.meet_link || "NA"}
+          </div>
+          <div>
+            <span className="mr-3 text-tertiaryblue-50 font-Heading">
+              Fees:
+            </span>
+            {app.fees}
+          </div>
+          <div>
+            <span className="mr-3 text-tertiaryblue-50 font-Heading">
+              Problem mentioned:
+            </span>
+            {props?.description.text?<Markup content={props?.description?.text}></Markup>:"NA"}
+          </div>
+          
+        </div>
+      </div>
           </div>
         </GenericModal>
       )}

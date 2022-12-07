@@ -356,7 +356,7 @@ const Index = () => {
             {appReq &&
               appReq.map((app,i) => (
                 <AppRequest {...app}   openHandler={openAppHandler} key={i}
-                closeHandler={closeAppHandler}></AppRequest>
+                closeHandler={closeAppHandler} id={app.doctor}></AppRequest>
               
               ))}
           </div>

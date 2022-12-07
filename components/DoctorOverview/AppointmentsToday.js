@@ -57,14 +57,14 @@ function AppointmentsToday(props) {
 
   const fetchUpcomingAppointmentsHandler = useCallback(async () => {
     const appointmentsData = await axios.get(
-      `https://hm-project-finalbackend.herokuapp.com/api/appointments/doctor-upcoming-appointment-list/${authCtx.id}`
+      `http://localhost:5000/api/appointments/doctor-upcoming-appointment-list/${authCtx.id}`
     );
     const currentDate = new Date();
     const requiredAppointments = appointmentsData?.data?.appointments?.filter((item) => {
       const appointmentDate = new Date(item?.appointment?.slot?.date); 
       return appointmentDate.getDate() === currentDate.getDate() && appointmentDate.getMonth() === currentDate.getMonth() && item?.appointment?.status === "Confirmed";
     });
-    console.log(requiredAppointments)
+    console.log(requiredAppointments,"app")
     setAppointmentsToday(requiredAppointments);
   }, [authCtx.id]);
 
