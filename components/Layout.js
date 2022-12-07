@@ -11,6 +11,17 @@ import ProfileButton from "./common/ProfileButton";
 function Layout(props) {
   const authCtx = useContext(AuthContext);
 
+  useEffect(() => {
+    const getDoctorDetails = async () => {
+      const doctor = await axios.get(
+        `https://hm-project-finalbackend.herokuapp.com/api/doctors/${authCtx?.id}`
+      );
+      setDoctorDetails(doctor?.data?.doctor);
+    };
+    if (authCtx.userType === "Doctor") {
+      getDoctorDetails();
+    }
+  }, []);
   return (
     <>
       {authCtx.userType === "Doctor" ? (

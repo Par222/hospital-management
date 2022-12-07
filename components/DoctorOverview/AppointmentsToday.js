@@ -57,7 +57,7 @@ function AppointmentsToday(props) {
 
   const fetchUpcomingAppointmentsHandler = useCallback(async () => {
     const appointmentsData = await axios.get(
-      `http://localhost:5000/api/appointments/doctor-upcoming-appointment-list/${authCtx.id}`
+      `https://hm-project-finalbackend.herokuapp.com/api/appointments/doctor-upcoming-appointment-list/${authCtx.id}`
     );
     const currentDate = new Date();
     const requiredAppointments = appointmentsData?.data?.appointments?.filter((item) => {

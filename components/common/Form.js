@@ -75,13 +75,13 @@ const Form = (props) => {
         if (result.ok) {
           const data = await result.json();
           const userData = await axios.get(
-            `http://localhost:5000/api/user-type/${email}`
+            `https://hm-project-finalbackend.herokuapp.com/api/user-type/${email}`
           );
           authCtx.onSetUserType(userData?.data?.userData?.user_type);
           if (userData?.data?.userData?.user_type === "Doctor") {
             router.push("/doctor");
             const doctorData = await axios.post(
-              `http://localhost:5000/api/doctors/login`,
+              `https://hm-project-finalbackend.herokuapp.com/api/doctors/login`,
               {
                 token: data.idToken,
                 name: name,
@@ -99,7 +99,7 @@ const Form = (props) => {
             );
           } else {
             const patientData = await axios.post(
-              `http://localhost:5000/api/patient/login`,
+              `https://hm-project-finalbackend.herokuapp.com/api/patient/login`,
               {
                 token: data.idToken,
                 name: name,
@@ -149,7 +149,7 @@ const Form = (props) => {
 
           if (userType === "Doctor") {
             const doctorData = await axios.post(
-              `http://localhost:5000/api/doctors/signup`,
+              `https://hm-project-finalbackend.herokuapp.com/api/doctors/signup`,
               {
                 token: data.idToken,
                 name: name,
@@ -176,7 +176,7 @@ const Form = (props) => {
             router.push("/doctor");
           } else {
             const patientData = await axios.post(
-              `http://localhost:5000/api/patient/signup`,
+              `https://hm-project-finalbackend.herokuapp.com/api/patient/signup`,
               {
                 token: data.idToken,
                 name: name,
@@ -197,7 +197,7 @@ const Form = (props) => {
           }
           authCtx.onSetUserType(userType);
 
-          const userData = axios.post("http://localhost:5000/api/user-type", {
+          const userData = axios.post("https://hm-project-finalbackend.herokuapp.com/api/user-type", {
             user: user,
           });
         } else

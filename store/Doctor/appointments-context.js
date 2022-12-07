@@ -50,7 +50,7 @@ export function AppointmentContextProvider(props) {
 
   const fetchAppointmentsHandler = useCallback(async () => {
     const appointmentsData = await axios.get(
-      `http://localhost:5000/api/appointments/doctor-appointment-list/${authCtx.id}`
+      `https://hm-project-finalbackend.herokuapp.com/api/appointments/doctor-appointment-list/${authCtx.id}`
     );
     appointmentsDispatchFunction({
       type: "SET_APPOINTMENTS",
@@ -60,7 +60,7 @@ export function AppointmentContextProvider(props) {
 
   const addAppointmentHandler = async (appointment) => {
     const newAppointment = await axios.post(
-      "http://localhost:5000/api/appointments",
+      "https://hm-project-finalbackend.herokuapp.com/api/appointments",
       {
         appointment: appointment,
       }
@@ -80,7 +80,7 @@ export function AppointmentContextProvider(props) {
 
   const editAppointmentHandler = async (appointment) => {
     const editedAppointment = await axios.patch(
-      `http://localhost:5000/api/appointments/${appointment.id}`,
+      `https://hm-project-finalbackend.herokuapp.com/api/appointments/${appointment.id}`,
       {
         appointment: appointment,
       }
@@ -90,8 +90,6 @@ export function AppointmentContextProvider(props) {
       value: editedAppointment?.data,
     });
   };
-
-  
 
   // const confirmAppointmentHandler = async (appointmentToBeConfirmed) => {
 
